@@ -1,3 +1,4 @@
+package Simulation.Propagation;
 import java.awt.Point;
 
 public class Neighbourhood {

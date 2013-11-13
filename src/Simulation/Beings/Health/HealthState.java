@@ -1,3 +1,4 @@
+package Simulation.Beings.Health;
 
 public class HealthState {
 	public static int Healthy = 0;

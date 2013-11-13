@@ -1,4 +1,11 @@
+package Simulation.Propagation.Behaviors;
+
 import java.util.Random;
+
+import Simulation.Beings.LivingEntity;
+import Simulation.Beings.PropagationNode;
+import Simulation.Propagation.PropagableResistanceBonus;
+import Simulation.Propagation.PropagationEvent;
 
 
 public class Habit extends PropagableResistanceBonus {

@@ -1,7 +1,14 @@
+package Simulation.Propagation.Illness;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
+
+import Simulation.Beings.LivingEntity;
+import Simulation.Beings.PropagationNode;
+import Simulation.Propagation.PropagableResistanceBonus;
+import Simulation.Propagation.PropagationEvent;
 
 
 public class Vaccine extends PropagableResistanceBonus {

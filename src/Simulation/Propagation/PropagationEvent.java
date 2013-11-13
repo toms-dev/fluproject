@@ -1,3 +1,4 @@
+package Simulation.Propagation;
 
 public class PropagationEvent {
 	

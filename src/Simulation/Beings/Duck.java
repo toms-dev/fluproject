@@ -1,3 +1,4 @@
+package Simulation.Beings;
 
 public class Duck extends Animal {
 	

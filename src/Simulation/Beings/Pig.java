@@ -1,3 +1,4 @@
+package Simulation.Beings;
 
 public class Pig extends Animal { 
 	public Pig(int x, int y) {
@@ -5,5 +6,4 @@ public class Pig extends Animal {
 		symbol = 'P';
 		name = "Pig";
 	}
-	
 }

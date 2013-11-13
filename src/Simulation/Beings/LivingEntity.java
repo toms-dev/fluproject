@@ -1,8 +1,18 @@
+package Simulation.Beings;
+
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+
+import Simulation.Beings.Health.HealthState;
+import Simulation.Beings.Health.HealthStateFactory;
+import Simulation.Propagation.Propagable;
+import Simulation.Propagation.PropagableResistanceBonus;
+import Simulation.Propagation.Behaviors.Habit;
+import Simulation.Propagation.Illness.Illness;
+import Simulation.Propagation.Illness.Vaccine;
 
 
 public abstract class LivingEntity implements PropagationNode {
@@ -125,7 +135,7 @@ public abstract class LivingEntity implements PropagationNode {
 	 * Do a tick. Returns true if the entity's health state has to be changed.
 	 * @return True if the entity's health state has to be changed.
 	 */
-	public boolean tick(){
+	public boolean tick() {
 		health.tick();
 		if (health.mustBeUpdated()){
 			updateToNextHealthState();

@@ -1,3 +1,4 @@
+package Simulation.Beings.Health;
 
 public class HealthStateFactory {
 	public static int SickDuration = 2,

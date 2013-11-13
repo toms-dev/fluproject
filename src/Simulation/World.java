@@ -1,9 +1,16 @@
+package Simulation;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
+
+import Simulation.Beings.LivingEntity;
+import Simulation.Beings.Health.HealthState;
+import Simulation.Propagation.Neighbourhood;
+import Simulation.Propagation.Propagable;
+import Simulation.Propagation.PropagationEvent;
 
 public class World {
 	private Dimension size;

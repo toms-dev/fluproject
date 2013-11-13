@@ -1,8 +1,16 @@
+package Simulation.Propagation.Illness;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import Simulation.Beings.LivingEntity;
+import Simulation.Beings.PropagationNode;
+import Simulation.Propagation.Propagable;
+import Simulation.Propagation.PropagableResistanceBonus;
+import Simulation.Propagation.PropagationEvent;
+import Simulation.Propagation.ResistancesSet;
 
 public class Illness extends Propagable {
 	private List<Integer> targetSpecies = new ArrayList<Integer>();

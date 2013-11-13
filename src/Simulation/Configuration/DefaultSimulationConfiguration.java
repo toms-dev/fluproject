@@ -1,3 +1,5 @@
+package Simulation.Configuration;
+
 
 public class DefaultSimulationConfiguration extends SimulationConfiguration {
 	public DefaultSimulationConfiguration() {

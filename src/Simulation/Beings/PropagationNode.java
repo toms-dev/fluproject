@@ -1,4 +1,8 @@
+package Simulation.Beings;
+
 import java.util.List;
+
+import Simulation.Propagation.Propagable;
 
 
 /**

@@ -1,9 +1,23 @@
+package Simulation.Configuration;
+
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import Simulation.World;
+import Simulation.Beings.Chicken;
+import Simulation.Beings.Duck;
+import Simulation.Beings.Human;
+import Simulation.Beings.LivingEntity;
+import Simulation.Beings.Pig;
+import Simulation.Propagation.Neighbourhood;
+import Simulation.Propagation.Propagable;
+import Simulation.Propagation.Behaviors.Habit;
+import Simulation.Propagation.Illness.Illness;
+import Simulation.Propagation.Illness.Vaccine;
 
 
 public class SimulationConfiguration {

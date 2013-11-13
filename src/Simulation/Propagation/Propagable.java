@@ -1,3 +1,6 @@
+package Simulation.Propagation;
+import Simulation.Beings.PropagationNode;
+
 
 /**
  * This interface describes a propagable element.

@@ -1,3 +1,4 @@
+package Simulation.Beings;
 
 public class Human extends LivingEntity {
 
@@ -6,7 +7,5 @@ public class Human extends LivingEntity {
 		canDie = true ;
 		symbol = '@';
 		name = "Human";
-	}
-	
-	
+	}	
 }

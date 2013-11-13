@@ -1,3 +1,4 @@
+package App;
 public class PrettyConsole {
 	private static final int width = 55;
 	private static final int padding = 1;

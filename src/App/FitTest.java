@@ -1,3 +1,5 @@
+package App;
+
 
 public class FitTest {
 	public static void main(String[] args){

@@ -1,3 +1,4 @@
+package Simulation.Beings;
 
 public class Animal extends LivingEntity {
 	

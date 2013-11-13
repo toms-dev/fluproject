@@ -1,5 +1,9 @@
+package Simulation.Propagation;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import Simulation.Propagation.Illness.Illness;
 
 
 public abstract class PropagableResistanceBonus extends Propagable {

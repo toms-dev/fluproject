@@ -1,7 +1,13 @@
+package App;
+
 import java.io.BufferedReader;
 import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import Simulation.Beings.Health.HealthState;
+import Simulation.Configuration.DefaultSimulationConfiguration;
+import Simulation.Configuration.SimulationConfiguration;
 
 
 public class App {

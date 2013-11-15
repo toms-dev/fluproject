@@ -13,6 +13,7 @@ import Simulation.Propagation.Propagable;
 import Simulation.Propagation.PropagationEvent;
 
 public class World {
+    private static World instance;
 	private Dimension size;
 	private LivingEntity[][] grid;
 	private List<LivingEntity> entities;
@@ -26,6 +27,15 @@ public class World {
 		size = new Dimension(width, height);
 		grid = new LivingEntity[width][height];
 		ticksWithoutEvents = 0;
+		instance = this;
+	}
+	
+	/**
+	 * Returns the instance of World
+	 * @return The World instance
+	 */
+	public static World getInstance() {
+	    return instance;
 	}
 
 	/**

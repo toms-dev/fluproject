@@ -86,11 +86,11 @@ public class World {
 		return getNeighbors(entity.getPosX(), entity.getPosY());
 	}
 
-	public String toString(String log) {
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
+		LogManager logM = LogManager.getInstance();
 		sb.append("Day ").append(day).append("\n");
 		int xMax = grid.length, yMax = grid[0].length;
-		String[] lines = log.split("\n");
 		for (int y = -2; y <= yMax + 1; y++) {
 			for (int x = -2; x <= xMax + 1; x++) {
 				// sb.append('|');
@@ -140,9 +140,8 @@ public class World {
 					sb.append(' ');
 				}
 			}
-			if (y + 2 < lines.length) {
-				sb.append(lines[y + 2]);
-			}
+			String log = logM.poll();
+			if(log != null) sb.append(log);
 			sb.append("\n");
 		}
 		return sb.toString();
@@ -171,12 +170,9 @@ public class World {
 
 	/**
 	 * Performs a
-	 * 
-	 * @return
 	 */
-	public String tick() {
-		StringBuilder sb = new StringBuilder();
-
+	public void tick() {
+	    LogManager logM = LogManager.getInstance();
 		boolean somethingHappened = false;
 
 		// Perform internal ticking of the entities
@@ -211,7 +207,7 @@ public class World {
 						}
 						
 						if (event.isLogged()) {
-							sb.append(event.getMessage()).append("\n");
+							logM.log(event.getMessage());
 						}
 					}
 				}
@@ -234,7 +230,7 @@ public class World {
 		
 		day++;
 
-		return sb.toString();
+		//return sb.toString();
 	}
 
 	public boolean isFinished() {

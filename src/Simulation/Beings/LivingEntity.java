@@ -114,12 +114,12 @@ public abstract class LivingEntity implements PropagationNode {
 	 * If the entity was Recovering, it gets healthy again.
 	 */
 	public void updateToNextHealthState(){
-		Random r = new Random();
 		int type = health.getType(); 
 		if( type == HealthState.Sick ){
 			setContagious();
 		}
 		else if ( type == HealthState.Contagious ) {
+		    Random r = new Random();
 			if( r.nextBoolean() || ! canDie ){
 				setRecovering();
 			} else {

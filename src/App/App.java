@@ -5,6 +5,7 @@ import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import Simulation.LogManager;
 import Simulation.Beings.Health.HealthState;
 import Simulation.Configuration.DefaultSimulationConfiguration;
 import Simulation.Configuration.SimulationConfiguration;
@@ -16,7 +17,9 @@ public class App {
 	
 	
 	public static void main(String[] args) throws IOException, InterruptedException{
-		System.out.println(PrettyConsole.HeaderTextBox("Welcome !", "Welcome to Epidemics, the flu propagation\nsimulation !"));
+		LogManager logM = LogManager.getInstance();
+	    
+	    System.out.println(PrettyConsole.HeaderTextBox("Welcome !", "Welcome to Epidemics, the flu propagation\nsimulation !"));
 
 		System.out.println("Initializing simulation...");
 		
@@ -36,7 +39,8 @@ public class App {
 		autoPlay = App.readBooleanYN("\nDo you want to enable autoplay ?");
 		if (autoPlay) configureAutoPlay();
 		
-		System.out.println(config.world.toString("World created."));
+		logM.log("World created.");
+		System.out.println(config.world);
 		
 		while(!config.world.isFinished()){	
 			if( autoPlay ){
@@ -50,8 +54,9 @@ public class App {
 				}
 			}
 			System.out.println("\n\n");
-			String log = config.world.tick();
-			System.out.println(config.world.toString(log));
+			//String log = config.world.tick();
+			config.world.tick();
+			System.out.println(config.world);
 		}
 		
 		System.out.println(PrettyConsole.HeaderTextBox("Info", "The simulation is now finished !\n"+config.world.getEntitiesWithHealth(HealthState.Dead).size()+" died from the flu."));	

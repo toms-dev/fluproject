@@ -54,4 +54,8 @@ public class ResistancesSet {
 		return (new StringBuilder()).append(target.toString()).append(" was protected from ")
 				.append(i.toString()).append(" given by ").append(source.toString()).toString();
 	}
+	
+	public  List<PropagableResistanceBonus> getResistance() {
+		return this.resistances;
+	}
 }

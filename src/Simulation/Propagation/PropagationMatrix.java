@@ -8,6 +8,7 @@ import java.util.Map;
  */
 public class PropagationMatrix<T>  {
 	private T anyValue ;
+	//le premier "T" contamine le deuxième "T" avec une probabilité de "double"
 	private Map<T, Map<T, Double>> propagationRates ;
 	
 	public PropagationMatrix(T anyValue){

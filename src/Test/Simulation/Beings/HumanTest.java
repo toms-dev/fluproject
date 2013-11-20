@@ -43,7 +43,7 @@ public class HumanTest {
 		assertEquals(human.getPosY(),0);
 	}
 
-	@Test
+	@Test//GNEUH
 	public void testGetHealth() {
 		HealthState healthy = new HealthState(0,false,true);
 		assertEquals(human.getHealth(),healthy);
@@ -63,18 +63,18 @@ public class HumanTest {
 		human.setContagious();
 		assertEquals(human.isContagious(),true);
 	}
-	/*
+	
 	@Test
 	public void testHasIllness() {
 		Illness illness= new Illness("H5N1",4);
 	}
-	 */
-	@Test
+	
+	
+	@Test //GNEUUUUUUUUUUUH
 	public void testUpdateToNextHealthState() {
 		human.setRecovering();
 		human.updateToNextHealthState();
-		HealthState healthy = new HealthState(1,false,true);
-		assertEquals(human.getHealth(),healthy);
+		assertEquals(human.getHealth(),HealthStateFactory.Recovering());
 	}
 
 	@Test

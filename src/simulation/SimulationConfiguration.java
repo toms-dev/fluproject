@@ -25,7 +25,7 @@ import simulation.propagation.illness.Vaccine;
  * @author Tom GUILLERMIN
  */
 public class SimulationConfiguration {   
-	private Point[] neighbourhoodVectors;
+	private Neighbourhood neighbourhood;
 	
 	private Map<String, Illness> Illnesses ;
 	private Map<String, Vaccine> Vaccines ;
@@ -49,15 +49,10 @@ public class SimulationConfiguration {
 	
 	/**
      * Define the type of neighborhood used in the simulation.
-     * @param name Name of used neighborhood.
+     * @param type Name of used neighborhood.
      */
-    public void setNeighbourhoodType(String name){
-        if ("four".equals(name)) {
-            neighbourhoodVectors = Neighbourhood.FOUR;
-        }
-        else if("eight".equals(name)){
-            neighbourhoodVectors = Neighbourhood.EIGHT;
-        }
+    public void setNeighbourhoodType(String type){
+        neighbourhood = new Neighbourhood(type);
     }
 	
 	
@@ -91,10 +86,10 @@ public class SimulationConfiguration {
 	 * @param height The height of the world.
 	 * @author Loïc GAILLARD
 	 */
-	public void setupWorld(int width, int height, Point[] neighbourhoodVectors) {
+	public void setupWorld(int width, int height, Neighbourhood neighbourhood) {
 	    System.out.println("World size : "+width+"x"+height);
 		world = World.getInstance();
-		world.setup(width, height, neighbourhoodVectors);
+		world.setup(width, height, neighbourhood);
 	}
 	
 	/**
@@ -103,7 +98,7 @@ public class SimulationConfiguration {
      * @author Loïc GAILLARD
 	 */
 	public void setup(){
-		setupWorld(worldWidth, worldHeight, neighbourhoodVectors);
+		setupWorld(worldWidth, worldHeight, neighbourhood);
 		generateBaseIllnesses();
 		generatePopulation();
 	}

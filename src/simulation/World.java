@@ -24,7 +24,7 @@ public class World {
 	private Dimension size;
 	private Being[][] grid;
 	private List<Being> entities;
-	private Point[] neighbourhoodVectors;
+	private Neighbourhood neighbourhood;
 	
 	private int day = 1 ;
 
@@ -50,11 +50,11 @@ public class World {
 	 * @param height The height of the world
 	 * @author Loïc GAILLARD
 	 */
-	public void setup(int width, int height, Point[] neighbourhoodVectors) {
+	public void setup(int width, int height, Neighbourhood neighbourhood) {
 	    entities = new ArrayList<Being>();
         size = new Dimension(width, height);
         grid = new Being[width][height];
-        this.neighbourhoodVectors = neighbourhoodVectors;
+        this.neighbourhood = neighbourhood;
 	}
 
 	/**
@@ -82,6 +82,7 @@ public class World {
 	 */
 	public List<Being> getNeighbors(int x, int y) {
 		List<Being> neighbors = new ArrayList<Being>();
+		Point[] neighbourhoodVectors = neighbourhood.getVectors();
 		int length = neighbourhoodVectors.length;
 		for (int i = 0; i < length; i++) {
 			Point neighbourhoodVector = neighbourhoodVectors[i];

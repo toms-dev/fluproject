@@ -9,7 +9,7 @@ import simulation.propagation.Propagable;
 /**
  * This interface describes an element to which a propagation may happen.
  * It can receive and propagate Propagables.
- * @author tguiller
+ * @author Tom GUILLERMIN
  *
  */
 public interface PropagationNode {

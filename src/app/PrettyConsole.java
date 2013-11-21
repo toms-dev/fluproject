@@ -1,4 +1,10 @@
 package app;
+
+/**
+ * Gives some tools to build a pretty console "interface"
+ * @author uTom GUILLERMIN
+ *
+ */
 public class PrettyConsole {
 	private static final int width = 55;
 	//private static final int padding = 1;

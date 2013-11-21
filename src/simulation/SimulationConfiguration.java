@@ -23,6 +23,7 @@ import simulation.propagation.illness.Vaccine;
 /**
  * This class is used to store the configuration of the Simulation.
  * @author Tom GUILLERMIN
+ * @author Loïc GAILLARD
  */
 public class SimulationConfiguration {   
 	private Neighbourhood neighbourhood;

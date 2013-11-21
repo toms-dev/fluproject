@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Classe gérant les logs des evenements du programme
+ * Manages the logs of the program
  * @author Loïc GAILLARD
  *
  */

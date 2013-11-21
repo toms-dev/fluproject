@@ -12,6 +12,11 @@ import simulation.propagation.PropagationEvent;
 import simulation.propagation.ResistancesSet;
 
 
+/**
+ * 
+ * @author Tom GUILLERMIN
+ *
+ */
 public class Illness extends Propagable {
 	private List<Integer> targetSpecies = new ArrayList<Integer>();
 	private String name;

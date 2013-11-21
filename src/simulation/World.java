@@ -17,6 +17,7 @@ import simulation.propagation.PropagationEvent;
  * simulation lives.
  * It has to be used as a Singleton.
  * @author Tom GUILLERMIN
+ * @author Loïc GAILLARD
  *
  */
 public class World {

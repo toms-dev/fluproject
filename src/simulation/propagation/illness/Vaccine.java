@@ -11,7 +11,11 @@ import simulation.propagation.PropagableResistanceBonus;
 import simulation.propagation.PropagationEvent;
 
 
-
+/**
+ * 
+ * @author TOM GUILLERMIN
+ *
+ */
 public class Vaccine extends PropagableResistanceBonus {
 	protected String name ;
 	protected List<Integer> species = new ArrayList<Integer>();

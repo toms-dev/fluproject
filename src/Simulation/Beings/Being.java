@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import Simulation.World;
 import Simulation.Beings.Health.HealthState;
 import Simulation.Beings.Health.HealthStateFactory;
 import Simulation.Propagation.Propagable;
@@ -138,7 +137,6 @@ public abstract class Being implements PropagationNode {
 		health.tick();
 		if (health.mustBeUpdated()){
 			updateToNextHealthState();
-			World.getInstance().somethingHappened();
 		}
 	}
 	

@@ -9,20 +9,18 @@ public class HealthState {
 	
 	private int type ;
 	
-	private boolean isContagious, canChange;
-	private int stateDuration ;
+	private boolean isContagious;
 	
 	private boolean autoExpires = false;
 	private int remainingDays ;
 	
 	public HealthState(int type, boolean isContagious, boolean canChange){
-		this(type, isContagious, canChange, -1);
+		this(type, isContagious, -1);
 	}
 	
-	public HealthState(int type, boolean isContagious, boolean canChange, int duration){
+	public HealthState(int type, boolean isContagious, int duration){
 		this.type = type ;
 		this.isContagious = isContagious;
-		this.canChange = canChange;
 		if( duration != -1 ){
 			autoExpires = true ;
 			this.remainingDays = duration;

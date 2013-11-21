@@ -115,8 +115,7 @@ public class Vaccine extends PropagableResistanceBonus {
 	@Override
 	public boolean canPropagateFromTo(PropagationNode source,
 			PropagationNode target) {
-		Being sourceEntity = (Being) source,
-				targetEntity = (Being) target;
+		Being targetEntity = (Being) target;
 		return species.contains(targetEntity);
 	}
 }

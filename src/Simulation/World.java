@@ -16,8 +16,6 @@ public class World {
 	private Dimension size;
 	private Being[][] grid;
 	private List<Being> entities;
-	private int ticksWithoutEvents;
-	private boolean somethingHappened;
 	
 	private int day = 1 ;
 
@@ -25,7 +23,6 @@ public class World {
 		entities = new ArrayList<Being>();
 		size = new Dimension(width, height);
 		grid = new Being[width][height];
-		ticksWithoutEvents = 0;
 		instance = this;
 	}
 	
@@ -206,10 +203,6 @@ public class World {
 						// Attempt to propagate
 						PropagationEvent event = p.tryToPropagateTo(entity,
 								neighbor);
-						// Feedback to world via the event data.
-						if (event.isImportant()) {
-							somethingHappened = true;
-						}
 						
 						if (event.isLogged()) {
 							logM.log(event.getMessage());
@@ -235,11 +228,6 @@ public class World {
 		}*/
 		
 		day++;
-		somethingHappened = false;
-	}
-	
-	public void somethingHappened() {
-	    somethingHappened = true;
 	}
 
 	/**

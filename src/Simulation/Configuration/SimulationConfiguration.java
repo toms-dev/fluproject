@@ -67,10 +67,10 @@ public class SimulationConfiguration {
 		Vaccines = new HashMap<String, Vaccine>();
 		Habits = new HashMap<String, Habit>();
 		
-		Illness flu = new Illness("flu", 3);
+		Illness flu = new Illness("flu");
 		flu.addTargetSpecies(Being.HUMAN);
 		
-		Illness H5N1 = new Illness("H5N1", 6);
+		Illness H5N1 = new Illness("H5N1");
 		
 		H5N1.addTargetSpecies(Being.CHICKEN);
 		H5N1.addTargetSpecies(Being.DUCK);
@@ -85,7 +85,7 @@ public class SimulationConfiguration {
 		Vaccine H5N1Vaccine = new Vaccine("H5N1 Human Vaccine");
 		H5N1Vaccine.addProtectionAgainst(H5N1);
 		
-		Illness H1N1 = new Illness("H1N1", 6);
+		Illness H1N1 = new Illness("H1N1");
 		H1N1.addPropagationLink(Being.PIG, Being.HUMAN, 0.1);
 		H1N1.addPropagationLink(Being.HUMAN, Being.HUMAN, 0.5);
 		
@@ -137,7 +137,7 @@ public class SimulationConfiguration {
 		
 		int H5N1VaccinedHumans = (int) Math.round(humansNum*0.4*r.nextDouble()),
 				H1N1VaccinedHumans = (int) Math.round(humansNum*0.4*r.nextDouble()),
-				miracleVaccinedHumans = (int) Math.round(humansNum*0.15*r.nextDouble());
+				killersHumans = (int) Math.round(humansNum*0.15*r.nextDouble());
 		
 		System.out.println("   Adding "+humansNum+" humans...");
 		List<Being> humans = new ArrayList<Being>();

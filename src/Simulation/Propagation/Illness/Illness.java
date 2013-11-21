@@ -1,8 +1,7 @@
 package Simulation.Propagation.Illness;
 import java.util.ArrayList;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import Simulation.Beings.Being;
@@ -15,12 +14,10 @@ import Simulation.Propagation.ResistancesSet;
 public class Illness extends Propagable {
 	private List<Integer> targetSpecies = new ArrayList<Integer>();
 	private String name;
-	private int incubationTime;
-	private HashMap<Integer, HashMap<Integer, Double>> contaminationRates = new HashMap<Integer, HashMap<Integer, Double>>(); 
+	//private HashMap<Integer, HashMap<Integer, Double>> contaminationRates = new HashMap<Integer, HashMap<Integer, Double>>(); 
 
-	public Illness(String name, int incubationTime) {
+	public Illness(String name) {
 		this.name = name;
-		this.incubationTime = incubationTime;
 	}
 
 	/**
@@ -73,7 +70,7 @@ public class Illness extends Propagable {
 			double resistanceBase = targetEntity.getResistanceBase();
 			
 			if (attempt >= resistanceBase) {
-				ResistancesSet resistances = new ResistancesSet(resistanceBase);
+				ResistancesSet resistances = new ResistancesSet();
 				resistances.addAllResistances(targetEntity.getResistanceBonuses());
 				
 				PropagableResistanceBonus appliedResistance = resistances.applyResistancesToAttemp(this);

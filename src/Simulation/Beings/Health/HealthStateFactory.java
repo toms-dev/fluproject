@@ -10,15 +10,15 @@ public class HealthStateFactory {
 	}
 	
 	public static HealthState Sick(){
-		return new HealthState(HealthState.Sick, false, true, SickDuration);
+		return new HealthState(HealthState.Sick, false, SickDuration);
 	}
 	
 	public static HealthState Contagious(){
-		return new HealthState(HealthState.Contagious, true, true, ContagiousDuration);
+		return new HealthState(HealthState.Contagious, true, ContagiousDuration);
 	}
 	
 	public static HealthState Recovering(){
-		return new HealthState(HealthState.Recovering, false, true, RecoveringDuration);
+		return new HealthState(HealthState.Recovering, false, RecoveringDuration);
 	}
 	
 	public static HealthState Dead(){

@@ -1,4 +1,4 @@
-package Test.App;
+package app;
 
 import app.PrettyConsole;
 

@@ -11,8 +11,8 @@ import org.junit.Test;
 
 import org.junit.Before;
 
-import simulation.*;
 import simulation.beings.*;
+import simulation.propagation.Neighbourhood;
 public class WorldTest {
 
 	private World world;
@@ -20,17 +20,13 @@ public class WorldTest {
 
 	@Before
 	public void before() {
-		this.world=new World(10,10);
+		this.world=World.getInstance();
+		world.setup(10, 10, Neighbourhood.EIGHT);
 		this.entity= new Human(0,0);
 	}
 	@Test
 	public void testWorld() {
 		assertNotNull(world);
-	}
-
-	@Test
-	public void testGetInstance() {
-		assertEquals(world.getInstance(),world);
 	}
 
 	@Test

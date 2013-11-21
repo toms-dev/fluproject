@@ -28,10 +28,10 @@ public class ResistanceSetTest {
 	Illness illness;
 	@Before
 	public void before(){
-		this.resistance=new ResistancesSet(1.0);
+		this.resistance=new ResistancesSet();
 		this.habit1 = new Habit("habitude",1,0.5,1);
 		this.habit2 = new Habit("habitude2",2,1.0,1.0);
-		this.illness = new Illness("intoxication aux junits",0);
+		this.illness = new Illness("intoxication aux junits");
 		this.human=new Human(0,0);
 		this.chicken=new Chicken(0,1);
 	}

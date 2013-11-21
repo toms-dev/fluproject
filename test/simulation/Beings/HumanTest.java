@@ -10,7 +10,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import simulation.beings.*;
-import simulation.beings.health.*;
 import simulation.propagation.illness.*;
 
 public class HumanTest {
@@ -64,7 +63,10 @@ public class HumanTest {
 	
 	@Test
 	public void testHasIllness() {
-		Illness illness= new Illness("H5N1",4);
+	    assertEquals(human.hasIllness(), false);
+		Illness illness = new Illness("H5N1");
+	    human.setSick(illness);
+	    assertEquals(human.hasIllness(), true);
 	}
 
 

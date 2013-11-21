@@ -5,10 +5,8 @@
 package simulation.beings.health;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-import simulation.beings.health.*;
 public class HealthStateFactoryTest {
 
 	@Test

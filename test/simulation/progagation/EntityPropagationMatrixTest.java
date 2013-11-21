@@ -36,11 +36,6 @@ public class EntityPropagationMatrixTest {
 	}
 
 	@Test
-	public void testPropagationMatrix() {
-		assertNotNull((PropagationMatrix)matrix);
-	}
-
-	@Test
 	public void testGetPropagation() {
 		matrix.addPropagationLink(1,2,0.5);
 		

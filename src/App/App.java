@@ -5,10 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import Simulation.LogManager;
+import Simulation.SimulationConfiguration;
 import Simulation.World;
 import Simulation.Beings.Health.HealthState;
-import Simulation.Configuration.DefaultSimulationConfiguration;
-import Simulation.Configuration.SimulationConfiguration;
 
 /**
  * The Application class.
@@ -53,12 +52,9 @@ public class App {
     public void configure() {
         System.out.println("Initializing simulation...");
         
-        SimulationConfiguration config ;
-        if(InputReader.readBooleanYN("Do you want to load the default configuration ?")) {
-            config = new DefaultSimulationConfiguration();
-        }
-        else {
-            config = userConfiguration();
+        SimulationConfiguration config = new SimulationConfiguration();
+        if(!InputReader.readBooleanYN("Do you want to load the default configuration ?")) {
+            userConfiguration(config);
         }
         config.setup();
         
@@ -110,8 +106,7 @@ public class App {
      * @return The SimulationConfiguration.
      * @author Tom GUILLERMIN
      */
-    private SimulationConfiguration userConfiguration(){
-        SimulationConfiguration config = new SimulationConfiguration();
+    private void userConfiguration(SimulationConfiguration config){
         String neighbourhood = InputReader.readStringArray("\nSelect neighbourhood type :", new String[]{"four","eight"});
         config.setNeighbourhoodType(neighbourhood);
         
@@ -120,10 +115,9 @@ public class App {
         
         System.out.println("Creating a "+width+"x"+height+" world...");
         config.setWorldSize(width, height);
-        config.setupWorld(width, height);
         
         // Number of entities in the world
-        int maxEntitiesNum = world.getCellsNum();
+        int maxEntitiesNum = width*height;
         int entitiesRatio = InputReader.readIntegerInRange("\nPlease enter the population density percentage in the world :", 0, 100);
         int entitiesNum = (int) Math.floor((entitiesRatio*1.0)/100 * maxEntitiesNum);
         
@@ -149,7 +143,6 @@ public class App {
         config.setPopulation(humansNum, chickensNum, ducksNum, pigsNum);
         
         System.out.println("Initialization Done.");
-        return config ;
     }
     
     /**

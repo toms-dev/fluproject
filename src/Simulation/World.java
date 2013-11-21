@@ -23,21 +23,16 @@ public class World {
 	private Dimension size;
 	private Being[][] grid;
 	private List<Being> entities;
+	private Point[] neighbourhoodVectors;
 	
 	private int day = 1 ;
 
-	/**
-	 * Constructor
-	 * @param width The width of the world
-	 * @param height The height of the world
-	 */
-	private World() {
-		
-		instance = this;
-	}
+	
+	private World() {}
 	
 	/**
-	 * Returns the instance of World
+	 * Returns the instance of World.
+	 * Creates it if called the first time.
 	 * @return The World instance
 	 * @author Loïc GAILLARD
 	 */
@@ -54,10 +49,11 @@ public class World {
 	 * @param height The height of the world
 	 * @author Loïc GAILLARD
 	 */
-	public void setup(int width, int height) {
+	public void setup(int width, int height, Point[] neighbourhoodVectors) {
 	    entities = new ArrayList<Being>();
         size = new Dimension(width, height);
         grid = new Being[width][height];
+        this.neighbourhoodVectors = neighbourhoodVectors;
 	}
 
 	/**
@@ -85,11 +81,10 @@ public class World {
 	 */
 	public List<Being> getNeighbors(int x, int y) {
 		List<Being> neighbors = new ArrayList<Being>();
-		Point[] neighboringVectors = Neighbourhood.EIGHT;
-		int length = neighboringVectors.length;
+		int length = neighbourhoodVectors.length;
 		for (int i = 0; i < length; i++) {
-			Point neighboringVector = neighboringVectors[i];
-			int x1 = x + neighboringVector.x, y1 = y + neighboringVector.y;
+			Point neighbourhoodVector = neighbourhoodVectors[i];
+			int x1 = x + neighbourhoodVector.x, y1 = y + neighbourhoodVector.y;
 			if (isInGrid(x1, y1)) {
 				Being entity = getEntityAt(x1, y1);
 				if (entity != null) {
@@ -168,7 +163,7 @@ public class World {
 					char health = entity.getHealth().toReducedString();
 					if (health == ' ')
 						sb.append(' ');
-					sb.append(entity.symbol);
+					sb.append(entity.getSymbol());
 					if (health != ' ')
 						sb.append(health);
 
@@ -260,21 +255,6 @@ public class World {
 				}
 			}
 		}
-
-		// TODO : clean this if ok to remove.
-		/*
-		// Final result of the world tick :
-		
-		if (!somethingHappened) {
-			ticksWithoutEvents++;
-		} else {
-			ticksWithoutEvents = 0; // reset the counter
-		}
-
-		// End the simulation after 5 days without activity
-		if (ticksWithoutEvents >= 5) {
-			simulationFinished = true;
-		}*/
 		
 		day++;
 	}
@@ -291,7 +271,6 @@ public class World {
 			}
 		}
 		return true ;
-		//return simulationFinished;
 	}
 	
 	/**

@@ -1,4 +1,6 @@
-package App;
+package Test.App;
+
+import App.PrettyConsole;
 
 /**
  * Just a test class to try the "Pretty"Console class.

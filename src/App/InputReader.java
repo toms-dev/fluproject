@@ -55,7 +55,7 @@ public class InputReader {
      */
     public static int readIntegerInRange(String message, int min, int max){
         int input = readInteger(message);
-        while(min <= input && input <= max){
+        while(input < min || input > max){
             System.out.println(PrettyConsole.HeaderTextBox("Error", "You must enter a value between "+min+" and "+max+"."));
             input = readInteger(message);
         }

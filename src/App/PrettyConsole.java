@@ -45,7 +45,7 @@ public class PrettyConsole {
 	 * @param width		The width of the text.
 	 * @return	The formatted string.
 	 */
-	static String fit(String s, int width){
+	public static String fit(String s, int width){
 		StringBuilder sb = new StringBuilder();
 		String[] lines = s.split("\n");
 		for(String l : lines){

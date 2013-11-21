@@ -29,9 +29,9 @@ public abstract class Being implements PropagationNode {
 		DUCK = 3,
 		PIG = 4;
 	
-	public char symbol = 'X';
+	protected char symbol;
 	protected String name ;
-	private HealthState health, nextHealth;
+	private HealthState health;
 	private Point position ;
 	private int type ;
 	private Illness illness = null;
@@ -86,6 +86,15 @@ public abstract class Being implements PropagationNode {
 	 */
 	public HealthState getHealth(){
 		return health;
+	}
+	
+	/**
+	 * Gives the symbol of the being entity.
+	 * @return The symbol.
+	 * @author Loïc GAILLARD
+	 */
+	public char getSymbol() {
+	    return symbol;
 	}
 
 	/**
@@ -143,16 +152,6 @@ public abstract class Being implements PropagationNode {
 		health.tick();
 		if (health.mustBeUpdated()){
 			updateToNextHealthState();
-		}
-	}
-	
-	/**
-	 * Called at the end of the tick.
-	 * Finish updating the entity state.
-	 */
-	public void endOfTick(){
-		if( this.nextHealth != this.health ){
-			this.health = this.nextHealth;
 		}
 	}
 	

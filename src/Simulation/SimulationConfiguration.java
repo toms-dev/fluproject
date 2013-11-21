@@ -1,6 +1,5 @@
-package Simulation.Configuration;
+package Simulation;
 
-import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import Simulation.World;
 import Simulation.Beings.Chicken;
 import Simulation.Beings.Duck;
 import Simulation.Beings.Human;
@@ -25,19 +23,42 @@ import Simulation.Propagation.Illness.Vaccine;
  * This class is used to store the configuration of the Simulation.
  * @author Tom GUILLERMIN
  */
-public class SimulationConfiguration {
-	public Point[] neighbourhoodVectors = null;
+public class SimulationConfiguration {   
+	private Point[] neighbourhoodVectors;
 	
-	public Map<String, Illness> Illnesses ;
+	private Map<String, Illness> Illnesses ;
+	private Map<String, Vaccine> Vaccines ;
+	private Map<String, Habit> Habits ;
 	
-	public Map<String, Vaccine> Vaccines ;
+	private World world ;
+	private int worldWidth, worldHeight;
+	private int humansNum, chickensNum, ducksNum, pigsNum ;
 	
-	public Map<String, Habit> Habits ;
 	
-	public int humansNum, chickensNum, ducksNum, pigsNum ;
-	public int worldWidth, worldHeight;
+	/**
+	 * Constructor of the SimulationConfiguration
+	 * Sets the simulation to its default state.
+	 * @author Loïc GAILLARD 
+	 */
+	public SimulationConfiguration() {
+	    setNeighbourhoodType("eight");
+        setWorldSize(10,10);
+        setPopulation(30,10,5,10);
+	}
 	
-	protected World world ;
+	/**
+     * Define the type of neighborhood used in the simulation.
+     * @param name Name of used neighborhood.
+     */
+    public void setNeighbourhoodType(String name){
+        if ("four".equals(name)) {
+            neighbourhoodVectors = Neighbourhood.FOUR;
+        }
+        else if("eight".equals(name)){
+            neighbourhoodVectors = Neighbourhood.EIGHT;
+        }
+    }
+	
 	
 	/**
 	 * Defines the number of entity of each species in the population.
@@ -69,9 +90,10 @@ public class SimulationConfiguration {
 	 * @param height The height of the world.
 	 * @author Loïc GAILLARD
 	 */
-	public void setupWorld(int width, int height){
+	public void setupWorld(int width, int height, Point[] neighbourhoodVectors) {
+	    System.out.println("World size : "+width+"x"+height);
 		world = World.getInstance();
-		world.setup(width, height);
+		world.setup(width, height, neighbourhoodVectors);
 	}
 	
 	/**
@@ -80,10 +102,8 @@ public class SimulationConfiguration {
      * @author Loïc GAILLARD
 	 */
 	public void setup(){
-		setupWorld(worldWidth, worldHeight);
+		setupWorld(worldWidth, worldHeight, neighbourhoodVectors);
 		generateBaseIllnesses();
-		Dimension size = world.getSize();
-		System.out.println("World size : "+size.width+"x"+size.height);
 		generatePopulation();
 	}
 	
@@ -223,19 +243,6 @@ public class SimulationConfiguration {
 	}
 	
 	/**
-	 * Define the type of neighborhood used in the simulation.
-	 * @param name Name of used neighborhood.
-	 */
-	public void setNeighbourhoodType(String name){
-		if (name.equals("four")) {
-			neighbourhoodVectors = Neighbourhood.FOUR;
-		}
-		else if( name.equals("eight") ){
-			neighbourhoodVectors = Neighbourhood.EIGHT;
-		}
-	}
-	
-	/**
 	 * Randomly vaccinates a population
 	 * @param entities The population of entities that can be vaccinated
 	 * @param v		The vaccine
@@ -287,7 +294,5 @@ public class SimulationConfiguration {
 			}
 		}
 	}
-
-	
 }
 

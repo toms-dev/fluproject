@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import Simulation.World;
 import Simulation.Beings.Health.HealthState;
 import Simulation.Beings.Health.HealthStateFactory;
 import Simulation.Propagation.Propagable;
@@ -132,16 +133,14 @@ public abstract class LivingEntity implements PropagationNode {
 	}
 	
 	/**
-	 * Do a tick. Returns true if the entity's health state has to be changed.
-	 * @return True if the entity's health state has to be changed.
+	 * Do a tick.
 	 */
-	public boolean tick() {
+	public void tick() {
 		health.tick();
 		if (health.mustBeUpdated()){
 			updateToNextHealthState();
-			return true ;
+			World.getInstance().somethingHappened();
 		}
-		return false;
 	}
 	
 	/**

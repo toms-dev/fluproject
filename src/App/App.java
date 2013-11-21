@@ -54,7 +54,6 @@ public class App {
 				}
 			}
 			System.out.println("\n\n");
-			//String log = config.world.tick();
 			config.world.tick();
 			System.out.println(config.world);
 		}

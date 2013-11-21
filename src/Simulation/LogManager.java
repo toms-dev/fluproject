@@ -3,6 +3,11 @@ package Simulation;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Classe gérant les logs des evenements du programme
+ * @author Loïc GAILLARD
+ *
+ */
 public class LogManager {
     private static LogManager instance = new LogManager();
     private Queue<String> logQueue = new LinkedList<String>();
@@ -34,6 +39,10 @@ public class LogManager {
      */
     public String poll() {
         return logQueue.poll();
+    }
+    
+    public boolean isEmpty() {
+        return logQueue.isEmpty();
     }
     
     /**

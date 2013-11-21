@@ -18,6 +18,7 @@ public class World {
 	private LivingEntity[][] grid;
 	private List<LivingEntity> entities;
 	private int ticksWithoutEvents;
+	private boolean somethingHappened;
 	private boolean simulationFinished;
 	
 	private int day = 1 ;
@@ -89,28 +90,26 @@ public class World {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		LogManager logM = LogManager.getInstance();
+		
 		sb.append("Day ").append(day).append("\n");
 		int xMax = grid.length, yMax = grid[0].length;
 		for (int y = -2; y <= yMax + 1; y++) {
 			for (int x = -2; x <= xMax + 1; x++) {
-				// sb.append('|');
+			    // Ordonnee
 				if (x == -2) {
 					if (y <= -1 || y >= yMax)
 						sb.append("   ");
 					else {
-						sb.append(' ').append(y).append(' ');
+						if(y<10) sb.append(' ').append(y).append(' ');
+						else sb.append(' ').append(y);
 					}
 				} else if ((x == -1 && y == -2) || (x == xMax && y == -2))
 					sb.append("   ");
-				// Ordonnee
-				// if (x == -2 && y >= 0 && y < yMax)
-				// sb.append(' ').append(y).append(' ');
 				// Abscisse
-				else if (y == -2 && x >= 0 && x < xMax)
-					sb.append(' ').append(x).append(' ');
-				// else if ((x == -2 && y <= -1) || (x == xMax+1 && y > yMax) )
-				// sb.append("BBB");
-				else if (x == -1 && y == -1)
+				else if (y == -2 && x >= 0 && x < xMax) {
+					if(x<10) sb.append(' ').append(x).append(' ');
+					else sb.append(' ').append(x);
+				}else if (x == -1 && y == -1)
 					sb.append("  ╭");
 				else if (x == xMax && y == -1)
 					sb.append("──╮");
@@ -140,10 +139,13 @@ public class World {
 					sb.append(' ');
 				}
 			}
-			String log = logM.poll();
-			if(log != null) sb.append(log);
+			if(!logM.isEmpty()) sb.append(logM.poll());
 			sb.append("\n");
 		}
+		while(!logM.isEmpty()) {
+		    sb.append("   ").append(logM.poll()).append('\n');
+		}
+		
 		return sb.toString();
 	}
 
@@ -173,13 +175,10 @@ public class World {
 	 */
 	public void tick() {
 	    LogManager logM = LogManager.getInstance();
-		boolean somethingHappened = false;
 
 		// Perform internal ticking of the entities
 		for (LivingEntity entity : entities) {
-			if (entity.tick()) {
-				somethingHappened = true;
-			}
+			entity.tick();
 		}
 		
 		// Go across all the entities of the world
@@ -229,10 +228,17 @@ public class World {
 		}
 		
 		day++;
-
-		//return sb.toString();
+		somethingHappened = false;
+	}
+	
+	public void somethingHappened() {
+	    somethingHappened = true;
 	}
 
+	/**
+	 * Marks that something happened
+	 * @return
+	 */
 	public boolean isFinished() {
 		for(LivingEntity entity : entities){
 			if( entity.getHealth().getType() != HealthState.Healthy

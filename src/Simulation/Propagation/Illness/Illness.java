@@ -16,6 +16,10 @@ public class Illness extends Propagable {
 	private String name;
 	//private HashMap<Integer, HashMap<Integer, Double>> contaminationRates = new HashMap<Integer, HashMap<Integer, Double>>(); 
 
+	/**
+	 * Illness constructor.
+	 * @param name The name of the Illness.
+	 */
 	public Illness(String name) {
 		this.name = name;
 	}
@@ -91,6 +95,12 @@ public class Illness extends Propagable {
 		return event;
 	}
 	
+	/**
+	 * Returns the propagation rate between a source and a target entity.
+	 * @param source The entity propagating.
+	 * @param target The entity that might receive the illness.
+	 * @return The rate of propagation, between 0 and 1.
+	 */
 	public double getPropagationRate(Being source, Being target) {
 		if (! targetSpecies.contains(target)) return 0;
 		return getPropagationRate(source.getType(), target.getType());
@@ -100,6 +110,12 @@ public class Illness extends Propagable {
 		return name;
 	}
 
+	/**
+	 * Returns the relevant string when an entity has propagated the Illness to an other.  
+	 * @param source
+	 * @param target
+	 * @return
+	 */
 	public String getPropagatedMessage(PropagationNode source,
 			PropagationNode target) {
 		return new StringBuilder().append(target.toString())

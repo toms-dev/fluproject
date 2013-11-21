@@ -42,15 +42,28 @@ public class SimulationConfiguration {
 		pigsNum = pigs;
 	}
 	
+	/**
+	 * Sets the size of the World, in cells.
+	 * @param width The width of the world.
+	 * @param height The height of the world.
+	 */
 	public void setWorldSize(int width, int height){
 		worldWidth = width ;
 		worldHeight = height ;
 	}
 	
+	/**
+	 * Initialize the World instance.
+	 * @param width The width of the world.
+	 * @param height The height of the world.
+	 */
 	public void setupWorld(int width, int height){
 		world = new World(width, height);
 	}
 	
+	/**
+	 * Performs the initial configuration of the World.
+	 */
 	public void setup(){
 		setupWorld(worldWidth, worldHeight);
 		generateBaseIllnesses();
@@ -107,16 +120,6 @@ public class SimulationConfiguration {
 		
 		Habits.put("MudBath", mudBath);
 		Habits.put("Handwashing", handWashing);
-	}
-	
-	
-	public void generatePopulationFromRatio(int entitiesNum, int humansRatio, int chickensRatio, int ducksRatio, int pigsRatio){
-		/*int worldSize = world.getCellsNum(),
-				humansNum = (int) Math.round(worldSize * humansRate),
-				chickensNum = (int) Math.round(worldSize * chickensRate),
-				ducksNum = (int) Math.round(worldSize * ducksRate),
-				pigsNum = (int) Math.round(worldSize * pigsRate);
-		generatePopulation(humansNum, chickensNum, ducksNum, pigsNum);*/
 	}
 	
 	/**
@@ -204,6 +207,10 @@ public class SimulationConfiguration {
 		System.out.println("World populated successfully !");
 	}
 	
+	/**
+	 * Define the type of neighborhood used in the simulation.
+	 * @param name Name of used neighborhood.
+	 */
 	public void setNeighbourhoodType(String name){
 		if (name.equals("four")) {
 			neighbourhoodVectors = Neighbourhood.FOUR;
@@ -213,6 +220,12 @@ public class SimulationConfiguration {
 		}
 	}
 	
+	/**
+	 * Randomly vaccinates a population
+	 * @param entities The population of entities that can be vaccinated
+	 * @param v		The vaccine
+	 * @param number Number of vaccines to apply on the population
+	 */
 	public static void randomVaccinatePopulation(List<Being> entities, Vaccine v, int number){
 		if( number > entities.size() ){
 			throw new RuntimeException("You can't vaccinate "+number+" entities in a population of only "+entities.size());

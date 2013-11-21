@@ -1,3 +1,7 @@
+/**
+ * Classe de tests de la classe Pig .
+ * @author Bénédicte Lagouge
+ */
 package Test.Simulation.Beings;
 
 import static org.junit.Assert.*;

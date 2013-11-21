@@ -1,3 +1,7 @@
+/**
+ * Classe de tests de la classe EntityPropagationMatrix .
+ * @author Bénédicte Lagouge
+ */
 package Test.Simulation.Progagation;
 
 import static org.junit.Assert.*;

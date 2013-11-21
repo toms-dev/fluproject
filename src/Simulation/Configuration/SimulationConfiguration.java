@@ -21,6 +21,10 @@ import Simulation.Propagation.Illness.Illness;
 import Simulation.Propagation.Illness.Vaccine;
 
 
+/**
+ * This class is used to store the configuration of the Simulation.
+ * @author Tom GUILLERMIN
+ */
 public class SimulationConfiguration {
 	public Point[] neighbourhoodVectors = null;
 	
@@ -35,6 +39,13 @@ public class SimulationConfiguration {
 	public int humansNum, chickensNum, ducksNum, pigsNum ;
 	public int worldWidth, worldHeight;
 	
+	/**
+	 * Defines the number of entity of each species in the population.
+	 * @param humans The number of humans in the population.
+	 * @param chickens The number of chickens in the population.
+	 * @param ducks The number of ducks in the population.
+	 * @param pigs The number of pigs in the population.
+	 */
 	public void setPopulation(int humans, int chickens, int ducks, int pigs){
 		humansNum = humans;
 		chickensNum = chickens;

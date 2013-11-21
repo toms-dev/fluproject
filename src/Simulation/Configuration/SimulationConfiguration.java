@@ -51,6 +51,10 @@ public class SimulationConfiguration {
 		world = new World(width, height);
 	}
 	
+	/*
+	 * @author Tom GUILLERMIN
+	 * @author Loïc GAILLARD
+	 */
 	public void setup(){
 		setupWorld(worldWidth, worldHeight);
 		generateBaseIllnesses();

@@ -15,6 +15,10 @@ public abstract class Propagable {
 		propagationMatrix = m ;
 	}
 	
+	/**
+	 * Returns the propagation matrix of the Propagable.
+	 * @return The propagation matrix.
+	 */
 	public EntityPropagationMatrix getPropagationMatrix(){
 		return propagationMatrix;
 	}
@@ -23,12 +27,18 @@ public abstract class Propagable {
 	 * Returns the propagation rate from a source node to a target one.
 	 * @param sourceType
 	 * @param targetType
-	 * @return
+	 * @return The probability of propagation.
 	 */
 	public double getPropagationRate(Integer sourceType, Integer targetType) {
 		return propagationMatrix.getPropagation(sourceType, targetType);
 	}
 	
+	/**
+	 * Add a link of propagation between two species.
+	 * @param sourceType The emitting type.
+	 * @param targetType The receiving type.
+	 * @param rate The probability rate of propagation.
+	 */
 	public void addPropagationLink(int sourceType, int targetType, double rate) {
 		propagationMatrix.addPropagationLink(sourceType, targetType, rate);
 	}

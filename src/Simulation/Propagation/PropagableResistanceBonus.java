@@ -5,7 +5,11 @@ import java.util.Map;
 
 import Simulation.Propagation.Illness.Illness;
 
-
+/**
+ * This class represents a bonus of protection against a given Propagable.
+ * @author Tom GUILLERMIN
+ *
+ */
 public abstract class PropagableResistanceBonus extends Propagable {
 
 	private Map<Illness, Double> resistanceBonuses = new HashMap<Illness, Double>();
@@ -21,7 +25,7 @@ public abstract class PropagableResistanceBonus extends Propagable {
 	
 	/**
 	 * Returns the global resistance bonus.
-	 * @return
+	 * @return The global resistance bonus.
 	 */
 	public double getGlobalResistanceBonus() {
 		return globalResistanceBonus;
@@ -39,7 +43,7 @@ public abstract class PropagableResistanceBonus extends Propagable {
 	/**
 	 * Returns the value of the resistance bonus against the provided Illness.
 	 * @param i The illness.
-	 * @return
+	 * @return The value of the resistance bonus against the provided Illness.
 	 */
 	public double getResistanceBonusFor(Illness i) {
 		// Default value

@@ -2,8 +2,10 @@ package Simulation.Propagation;
 import java.util.HashMap;
 import java.util.Map;
 /**
- * Provides some basic implementation of the propagable interface.
- * @author tguiller
+ * This class represents a matrix of propagation for a propagable.
+ * It links all the emitting and receiving species with a given rate,
+ * that corresponds to the probability of a propagation.
+ * @author Tom GUILLERMIN
  *
  */
 public class PropagationMatrix<T>  {

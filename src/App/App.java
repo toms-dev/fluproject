@@ -54,7 +54,7 @@ public class App {
         System.out.println("Initializing simulation...");
         
         SimulationConfiguration config ;
-        if(readBooleanYN("Do you want to load the default configuration ?")) {
+        if(InputReader.readBooleanYN("Do you want to load the default configuration ?")) {
             config = new DefaultSimulationConfiguration();
         }
         else {
@@ -62,7 +62,7 @@ public class App {
         }
         config.setup();
         
-        if(readBooleanYN("\nDo you want to enable autoplay ?")) configureAutoPlay();
+        if(InputReader.readBooleanYN("\nDo you want to enable autoplay ?")) configureAutoPlay();
         
         world = World.getInstance();
         logManager.log("World created.");
@@ -112,11 +112,11 @@ public class App {
      */
     private SimulationConfiguration userConfiguration(){
         SimulationConfiguration config = new SimulationConfiguration();
-        String neighbourhood = readStringArray("\nSelect neighbourhood type :", new String[]{"four","eight"});
+        String neighbourhood = InputReader.readStringArray("\nSelect neighbourhood type :", new String[]{"four","eight"});
         config.setNeighbourhoodType(neighbourhood);
         
-        int width = readIntegerInRange("\nPlease enter the world width :", 2, 15);
-        int height = readIntegerInRange("\nPlease enter the world height :", 2, 15);        
+        int width = InputReader.readIntegerInRange("\nPlease enter the world width :", 2, 15);
+        int height = InputReader.readIntegerInRange("\nPlease enter the world height :", 2, 15);        
         
         System.out.println("Creating a "+width+"x"+height+" world...");
         config.setWorldSize(width, height);
@@ -124,16 +124,16 @@ public class App {
         
         // Number of entities in the world
         int maxEntitiesNum = world.getCellsNum();
-        int entitiesRatio = readIntegerInRange("\nPlease enter the population density percentage in the world :", 0, 100);
+        int entitiesRatio = InputReader.readIntegerInRange("\nPlease enter the population density percentage in the world :", 0, 100);
         int entitiesNum = (int) Math.floor((entitiesRatio*1.0)/100 * maxEntitiesNum);
         
         //System.out.println(entitiesNum+" entities will be created.");
         
         // Get the ratio
-        int humansRatio = readInteger("Enter human ratio :");
-        int chickensRatio = readInteger("Enter chickens ratio :");
-        int ducksRatio = readInteger("Enter ducks ratio :");
-        int pigsRatio = readInteger("Enter pigs ratio :");
+        int humansRatio = InputReader.readInteger("Enter human ratio :");
+        int chickensRatio = InputReader.readInteger("Enter chickens ratio :");
+        int ducksRatio = InputReader.readInteger("Enter ducks ratio :");
+        int pigsRatio = InputReader.readInteger("Enter pigs ratio :");
         
         int totalRatio = humansRatio + chickensRatio + ducksRatio + pigsRatio ;
         
@@ -158,109 +158,7 @@ public class App {
      * @author Loïc GAILLARD
      */
     private void configureAutoPlay() {
-        autoPlayDuration = readPositiveInteger("Please choose the duration of a day for the AutoPlay mode : (in ms) ");
+        autoPlayDuration = InputReader.readPositiveInteger("Please choose the duration of a day for the AutoPlay mode : (in ms) ");
         autoPlay = true;
-    }
-    
-    /**
-     * Displays a message and reads an integer on the System input.
-     * @author Tom GUILLERMIN
-     * @param message The message displayed to the user.
-     * @return The input value
-     */
-    private int readInteger(String message){
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        
-        while(true){
-            System.out.println(message);
-            try {
-                return Integer.parseInt(reader.readLine());
-            } catch (NumberFormatException e){
-                System.out.println(PrettyConsole.HeaderTextBox("Error", "Please enter a valid value !"));
-            } catch (IOException e){}
-        }
-    }
-    
-    /**
-     * Displays a message and reads a positive integer on the System input.
-     * The user input will be asked until the entered value is positive.
-     * @author Loïc GAILLARD
-     * @param message The message displayed to the user.
-     * @return The input value
-     */
-    private int readPositiveInteger(String message) {
-        int input;
-        while((input = readInteger(message)) < 0) {
-            System.out.println(PrettyConsole.HeaderTextBox("Error", "Please enter a positive number !"));
-        }
-        return input;
-    }
-    
-    /**
-     * Displays a message and reads an integer in a range on the System input.
-     * The user's input will be asked until the entered value is in range.
-     * @author Loïc GAILLARD
-     * @param message The message displayed to the user.
-     * @param min The minimum value of the input.
-     * @param max The maximum value of the input.
-     * @return The input value.
-     */
-    private int readIntegerInRange(String message, int min, int max){
-        int input = readInteger(message);
-        while(min <= input && input <= max){
-            System.out.println(PrettyConsole.HeaderTextBox("Error", "You must enter a value between "+min+" and "+max+"."));
-            input = readInteger(message);
-        }
-        return input ;
-    }
-    
-    /**
-     * Displays a message and reads a boolean on the System input.
-     * @author Loïc GAILLARD
-     * @param message The message displayed to the user.
-     * @return The input value
-     */
-    private boolean readBooleanYN(String message) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        while(true) {
-            System.out.println(message+" (Y/n)");
-            try {
-                String input = reader.readLine();
-                if("Y".equals(input) || "y".equals(input)) return true;
-                if("N".equals(input) || "n".equals(input)) return false;
-            } catch(IOException e){}
-        }
-    }
-    
-    /**
-     * Displays a message and reads a valid String on the System input.
-     * The user's input will be asked until the String is valid.
-     * @param message The message displayed to the user.
-     * @param validStrings The array of valid Strings
-     * @return The valid user's String
-     */
-    private String readStringArray(String message, String[] validStrings){
-        String input ;
-        
-        String join = "" ;
-        for(int i = 0 ; i < validStrings.length ; i++ ){
-            join += validStrings[i] ;
-            if( i < validStrings.length-1 ) join += ", ";
-        }
-        
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        
-        while(true){
-            System.out.println(message+" (Accepted values : "+join+")");
-            try {
-                input = reader.readLine();
-                for(String s : validStrings){
-                    if (s.equals(input)) {
-                        return input ;
-                    }
-                }
-                System.out.println(PrettyConsole.HeaderTextBox("Error", "Please enter one of these value : "+join));
-            } catch(IOException e){}
-        }
     }
 }

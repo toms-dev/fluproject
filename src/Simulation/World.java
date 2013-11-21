@@ -11,6 +11,13 @@ import Simulation.Propagation.Neighbourhood;
 import Simulation.Propagation.Propagable;
 import Simulation.Propagation.PropagationEvent;
 
+/**
+ * This class represents the world in which all the beings of the
+ * simulation lives.
+ * It has to be used as a Singleton.
+ * @author Tom GUILLERMIN
+ *
+ */
 public class World {
     private static World instance;
 	private Dimension size;
@@ -19,6 +26,11 @@ public class World {
 	
 	private int day = 1 ;
 
+	/**
+	 * Constructor
+	 * @param width The width of the world
+	 * @param height The height of the world
+	 */
 	public World(int width, int height) {
 		entities = new ArrayList<Being>();
 		size = new Dimension(width, height);
@@ -74,14 +86,29 @@ public class World {
 		return neighbors;
 	}
 
+	/**
+	 * Returns true if a point at given coordinates is is the grid or outside.
+	 * @param x		The X coordinates of the point
+	 * @param y		The Y coordinates of the point
+	 * @return	If the point is in the grid.
+	 */
 	private boolean isInGrid(int x, int y) {
 		return 0 <= x && x < grid.length && 0 <= y && y < grid[0].length;
 	}
 
+	/**
+	 * Returns the list of the neighbors of a given entity.
+	 * @param entity The entity to look around.
+	 * @return The entity's neighbors.
+	 */
 	public List<Being> getNeighbors(Being entity) {
 		return getNeighbors(entity.getPosX(), entity.getPosY());
 	}
 
+	/**
+	 * String representation of the world.
+	 * @return A string representing the world.
+	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		LogManager logM = LogManager.getInstance();
@@ -164,17 +191,25 @@ public class World {
 		return candidate;
 	}
 
+	/**
+	 * Returns the number of cells in the world.
+	 * @return The number of cells in the world.
+	 */
 	public int getCellsNum() {
 		return size.height * size.width;
 	}
 
+	/**
+	 * Add an entity in the world at the entity's position.
+	 * @param entity The entity to add in the world.
+	 */
 	public void addEntity(Being entity) {
 		grid[entity.getPosX()][entity.getPosY()] = entity;
 		entities.add(entity);
 	}
 
 	/**
-	 * Performs a
+	 * Performs a logic update.
 	 */
 	public void tick() {
 	    LogManager logM = LogManager.getInstance();
@@ -245,6 +280,11 @@ public class World {
 		//return simulationFinished;
 	}
 	
+	/**
+	 * Returns the list of the entities with a given health.
+	 * @param health The health that the returned entities must have.
+	 * @return The list of the entities having this health.
+	 */
 	public List<Being> getEntitiesWithHealth(int health){
 		List<Being> result = new ArrayList<Being>();
 		for(Being entity : entities){
@@ -255,6 +295,10 @@ public class World {
 		return result ;
 	}
 
+	/**
+	 * Returns the size of the world.
+	 * @return The size of the world.
+	 */
 	public Dimension getSize() {
 		return size;
 	}

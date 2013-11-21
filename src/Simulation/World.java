@@ -149,16 +149,24 @@ public class World {
 		return sb.toString();
 	}
 
+	/**
+	 * Gets the coordinates of a random empty cell
+	 * 
+	 * @author Loïc GAILLARD
+	 * @return The Point of a random empty cell
+	 */
 	public Point getRandomEmptyCell() {
 		Random r = new Random();
-		Point candidate;
-		// boolean valid = false;
-		while (true) {
-			candidate = new Point(r.nextInt(size.width), r.nextInt(size.height));
-			if (grid[candidate.x][candidate.y] == null) {
-				return candidate;
-			}
+		int xMax = size.width, yMax = size.height;
+		Point candidate = new Point(r.nextInt(xMax), r.nextInt(yMax));
+		
+		while(grid[candidate.x][candidate.y] != null) {
+		    if((++candidate.x) > xMax-1) {
+		        candidate.x = candidate.x%(xMax);
+		        candidate.y = (++candidate.y)%(yMax);
+		    }
 		}
+		return candidate;
 	}
 
 	public int getCellsNum() {

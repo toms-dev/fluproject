@@ -21,7 +21,7 @@ public class WorldTest {
 	@Before
 	public void before() {
 		this.world=World.getInstance();
-		world.setup(10, 10, new Neighbourhood("eight"));
+		world.setup(10, 10, Neighbourhood.EIGHT);
 		this.entity= new Human(0,0);
 	}
 	@Test

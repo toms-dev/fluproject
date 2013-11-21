@@ -52,7 +52,11 @@ public class SimulationConfiguration {
      * @param type Name of used neighborhood.
      */
     public void setNeighbourhoodType(String type){
-        neighbourhood = new Neighbourhood(type);
+        if("eight".equals(type)) {
+            neighbourhood = Neighbourhood.EIGHT;
+        } else if("four".equals(type)) {
+            neighbourhood = Neighbourhood.FOUR;
+        }
     }
 	
 	
@@ -170,8 +174,7 @@ public class SimulationConfiguration {
 		
 		
 		int H5N1VaccinedHumans = (int) Math.round(humansNum*0.4*r.nextDouble()),
-				H1N1VaccinedHumans = (int) Math.round(humansNum*0.4*r.nextDouble()),
-				killersHumans = (int) Math.round(humansNum*0.15*r.nextDouble());
+				H1N1VaccinedHumans = (int) Math.round(humansNum*0.4*r.nextDouble());
 		
 		System.out.println("   Adding "+humansNum+" humans...");
 		List<Being> humans = new ArrayList<Being>();

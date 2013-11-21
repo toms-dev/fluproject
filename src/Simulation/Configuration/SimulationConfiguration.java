@@ -34,10 +34,10 @@ public class SimulationConfiguration {
 	
 	public Map<String, Habit> Habits ;
 	
-	public World world ;
-	
 	public int humansNum, chickensNum, ducksNum, pigsNum ;
 	public int worldWidth, worldHeight;
+	
+	protected World world ;
 	
 	/**
 	 * Defines the number of entity of each species in the population.
@@ -67,9 +67,11 @@ public class SimulationConfiguration {
 	 * Initialize the World instance.
 	 * @param width The width of the world.
 	 * @param height The height of the world.
+	 * @author Loïc GAILLARD
 	 */
 	public void setupWorld(int width, int height){
-		world = new World(width, height);
+		world = World.getInstance();
+		world.setup(width, height);
 	}
 	
 	/**

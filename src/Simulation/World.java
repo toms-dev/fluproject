@@ -31,19 +31,33 @@ public class World {
 	 * @param width The width of the world
 	 * @param height The height of the world
 	 */
-	public World(int width, int height) {
-		entities = new ArrayList<Being>();
-		size = new Dimension(width, height);
-		grid = new Being[width][height];
+	private World() {
+		
 		instance = this;
 	}
 	
 	/**
 	 * Returns the instance of World
 	 * @return The World instance
+	 * @author Loïc GAILLARD
 	 */
 	public static World getInstance() {
+	    if(instance == null)
+	        instance = new World();
+	    
 	    return instance;
+	}
+	
+	/**
+	 * Setups the world.
+	 * @param width The width of the world
+	 * @param height The height of the world
+	 * @author Loïc GAILLARD
+	 */
+	public void setup(int width, int height) {
+	    entities = new ArrayList<Being>();
+        size = new Dimension(width, height);
+        grid = new Being[width][height];
 	}
 
 	/**
@@ -66,7 +80,7 @@ public class World {
 	 * @param x
 	 *            First coordinate of the source cell.
 	 * @param y
-	 *            Second coordinate fo the source cell.
+	 *            Second coordinate of the source cell.
 	 * @return The list of the neighboring entities.
 	 */
 	public List<Being> getNeighbors(int x, int y) {

@@ -123,7 +123,7 @@ public class App {
         config.setupWorld(width, height);
         
         // Number of entities in the world
-        int maxEntitiesNum = config.world.getCellsNum();
+        int maxEntitiesNum = world.getCellsNum();
         int entitiesRatio = readIntegerInRange("\nPlease enter the population density percentage in the world :", 0, 100);
         int entitiesNum = (int) Math.floor((entitiesRatio*1.0)/100 * maxEntitiesNum);
         
@@ -158,11 +158,7 @@ public class App {
      * @author Loïc GAILLARD
      */
     private void configureAutoPlay() {
-        autoPlayDuration = readInteger("Please choose the duration of a day for the AutoPlay mode : (in ms) ");
-        if( autoPlayDuration < 0) {
-            System.out.println(PrettyConsole.HeaderTextBox("Error", "Please enter a positive duration."));
-            configureAutoPlay();
-        }
+        autoPlayDuration = readPositiveInteger("Please choose the duration of a day for the AutoPlay mode : (in ms) ");
         autoPlay = true;
     }
     

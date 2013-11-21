@@ -1,5 +1,6 @@
 package Simulation.Configuration;
 
+import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,7 +54,8 @@ public class SimulationConfiguration {
 	public void setup(){
 		setupWorld(worldWidth, worldHeight);
 		generateBaseIllnesses();
-		System.out.println("World size : "+world.getSize().toString());
+		Dimension size = world.getSize();
+		System.out.println("World size : "+size.width+"x"+size.height);
 		generatePopulation();
 	}
 	

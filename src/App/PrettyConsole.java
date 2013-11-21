@@ -1,7 +1,7 @@
 package App;
 public class PrettyConsole {
 	private static final int width = 55;
-	private static final int padding = 1;
+	//private static final int padding = 1;
 	public static String HeaderTextBox(String header, String message){
 		StringBuilder sb = new StringBuilder();
 		String fitMessage = fit(message, width),

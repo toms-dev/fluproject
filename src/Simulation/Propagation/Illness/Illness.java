@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import Simulation.Beings.LivingEntity;
+import Simulation.Beings.Being;
 import Simulation.Beings.PropagationNode;
 import Simulation.Propagation.Propagable;
 import Simulation.Propagation.PropagableResistanceBonus;
@@ -46,7 +46,7 @@ public class Illness extends Propagable {
 	@Override
 	public boolean canPropagateFromTo(PropagationNode source, PropagationNode target) {
 		// Do some casting... (bad)
-		LivingEntity targetEntity = (LivingEntity) target;
+		Being targetEntity = (Being) target;
 		return targetSpecies.contains(targetEntity.getType());
 	}
 
@@ -65,7 +65,7 @@ public class Illness extends Propagable {
 		PropagationEvent event = new PropagationEvent();
 		event.setLogged(false);
 		
-		LivingEntity sourceEntity = (LivingEntity) source, targetEntity = (LivingEntity) target;
+		Being sourceEntity = (Being) source, targetEntity = (Being) target;
 				
 		if (canPropagateFromTo(sourceEntity, targetEntity)) {
 			Random r = new Random();
@@ -94,7 +94,7 @@ public class Illness extends Propagable {
 		return event;
 	}
 	
-	public double getPropagationRate(LivingEntity source, LivingEntity target) {
+	public double getPropagationRate(Being source, Being target) {
 		if (! targetSpecies.contains(target)) return 0;
 		return getPropagationRate(source.getType(), target.getType());
 	}

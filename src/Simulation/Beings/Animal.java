@@ -1,6 +1,6 @@
 package Simulation.Beings;
 
-public class Animal extends LivingEntity {
+public class Animal extends Being {
 	
 	public Animal(int type, int x, int y) {
 		super(type, x, y);

@@ -12,7 +12,7 @@ import Simulation.World;
 import Simulation.Beings.Chicken;
 import Simulation.Beings.Duck;
 import Simulation.Beings.Human;
-import Simulation.Beings.LivingEntity;
+import Simulation.Beings.Being;
 import Simulation.Beings.Pig;
 import Simulation.Propagation.Neighbourhood;
 import Simulation.Propagation.Propagable;
@@ -68,26 +68,26 @@ public class SimulationConfiguration {
 		Habits = new HashMap<String, Habit>();
 		
 		Illness flu = new Illness("flu", 3);
-		flu.addTargetSpecies(LivingEntity.HUMAN);
+		flu.addTargetSpecies(Being.HUMAN);
 		
 		Illness H5N1 = new Illness("H5N1", 6);
 		
-		H5N1.addTargetSpecies(LivingEntity.CHICKEN);
-		H5N1.addTargetSpecies(LivingEntity.DUCK);
-		H5N1.addTargetSpecies(LivingEntity.HUMAN);
+		H5N1.addTargetSpecies(Being.CHICKEN);
+		H5N1.addTargetSpecies(Being.DUCK);
+		H5N1.addTargetSpecies(Being.HUMAN);
 		
-		H5N1.addPropagationLink(LivingEntity.ANY, LivingEntity.CHICKEN, 0.4);
-		H5N1.addPropagationLink(LivingEntity.ANY, LivingEntity.DUCK, 0.3);
-		H5N1.addPropagationLink(LivingEntity.ANY, LivingEntity.HUMAN, 0.2);
-		H5N1.addPropagationLink(LivingEntity.HUMAN, LivingEntity.ANY, 0.1); // Very rare ;)
-		H5N1.addPropagationLink(LivingEntity.HUMAN, LivingEntity.HUMAN, 0.4);
+		H5N1.addPropagationLink(Being.ANY, Being.CHICKEN, 0.4);
+		H5N1.addPropagationLink(Being.ANY, Being.DUCK, 0.3);
+		H5N1.addPropagationLink(Being.ANY, Being.HUMAN, 0.2);
+		H5N1.addPropagationLink(Being.HUMAN, Being.ANY, 0.1); // Very rare ;)
+		H5N1.addPropagationLink(Being.HUMAN, Being.HUMAN, 0.4);
 		
 		Vaccine H5N1Vaccine = new Vaccine("H5N1 Human Vaccine");
 		H5N1Vaccine.addProtectionAgainst(H5N1);
 		
 		Illness H1N1 = new Illness("H1N1", 6);
-		H1N1.addPropagationLink(LivingEntity.PIG, LivingEntity.HUMAN, 0.1);
-		H1N1.addPropagationLink(LivingEntity.HUMAN, LivingEntity.HUMAN, 0.5);
+		H1N1.addPropagationLink(Being.PIG, Being.HUMAN, 0.1);
+		H1N1.addPropagationLink(Being.HUMAN, Being.HUMAN, 0.5);
 		
 		Vaccine H1N1Vaccine = new Vaccine("H1N1 Human Vaccine");
 		H5N1Vaccine.addProtectionAgainst(H5N1);
@@ -102,8 +102,8 @@ public class SimulationConfiguration {
 		Vaccines.put("H5N5", H1N1Vaccine);
 		Vaccines.put("Miracle", miracleVaccine);
 		
-		Habit handWashing = new Habit("Handwashing", LivingEntity.HUMAN, 0.25, 0.2),
-				mudBath = new Habit("MudBath", LivingEntity.PIG, 0.1, 0.3);
+		Habit handWashing = new Habit("Handwashing", Being.HUMAN, 0.25, 0.2),
+				mudBath = new Habit("MudBath", Being.PIG, 0.1, 0.3);
 		
 		Habits.put("MudBath", mudBath);
 		Habits.put("Handwashing", handWashing);
@@ -140,7 +140,7 @@ public class SimulationConfiguration {
 				miracleVaccinedHumans = (int) Math.round(humansNum*0.15*r.nextDouble());
 		
 		System.out.println("   Adding "+humansNum+" humans...");
-		List<LivingEntity> humans = new ArrayList<LivingEntity>();
+		List<Being> humans = new ArrayList<Being>();
 		int stubbornHumans = 0;
 		for(int i = 0; i < humansNum ; i++){
 			Point pos = world.getRandomEmptyCell();
@@ -188,7 +188,7 @@ public class SimulationConfiguration {
 		}
 		
 		System.out.println("   Adding "+pigsNum+" pigs...");
-		List<LivingEntity> pigs = new ArrayList<LivingEntity>();
+		List<Being> pigs = new ArrayList<Being>();
 		for(int i = 0; i < pigsNum ; i++){
 			Point pos = world.getRandomEmptyCell();
 			Pig e = new Pig(pos.x, pos.y);
@@ -213,14 +213,14 @@ public class SimulationConfiguration {
 		}
 	}
 	
-	public static void randomVaccinatePopulation(List<LivingEntity> entities, Vaccine v, int number){
+	public static void randomVaccinatePopulation(List<Being> entities, Vaccine v, int number){
 		if( number > entities.size() ){
 			throw new RuntimeException("You can't vaccinate "+number+" entities in a population of only "+entities.size());
 		}
 		Random r = new Random();
 		for(int i = 0; i < number ; i++){
 			boolean done = false;
-			LivingEntity entity ;
+			Being entity ;
 			while(!done){
 				entity = entities.get(r.nextInt(entities.size()));
 				System.out.println(entity+" | "+entity.getVaccines());
@@ -239,14 +239,14 @@ public class SimulationConfiguration {
 	 * @param p The propagable to spread.
 	 * @param number The number of propagations
 	 */
-	public static void randomInitialPropagation(List<LivingEntity> entities, Propagable p, int number){
+	public static void randomInitialPropagation(List<Being> entities, Propagable p, int number){
 		if( number > entities.size() ){
 			throw new RuntimeException("You can't propagate "+p+" to "+number+" entities in a population of only "+entities.size());
 		}
 		Random r = new Random();
 		for(int i = 0; i < number ; i++){
 			boolean done = false;
-			LivingEntity entity ;
+			Being entity ;
 			while(!done){
 				entity = entities.get(r.nextInt(entities.size()));
 

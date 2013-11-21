@@ -1,9 +1,9 @@
 package Simulation.Propagation;
-import Simulation.Beings.LivingEntity;
+import Simulation.Beings.Being;
 
 
 public class EntityPropagationMatrix extends PropagationMatrix<Integer>{
 	public EntityPropagationMatrix() {
-		super(LivingEntity.ANY);
+		super(Being.ANY);
 	}
 }

@@ -34,17 +34,17 @@ public abstract class Propagable {
 	}
 	
 	/**
-	 * Makes an attempt to propagate to the provided LivingEntity.
+	 * Makes an attempt to propagate to the provided Being.
 	 * Returns true if the propagation was successful.
-	 * @param e The target LivingEntity
+	 * @param e The target Being
 	 * @return True if the propagation was successful.
 	 */
 	public abstract PropagationEvent tryToPropagateTo(PropagationNode source, PropagationNode target);
 	
 	/**
-	 * Returns true if the Propagable can be propagate to the provided LivingEntity in a general way.
+	 * Returns true if the Propagable can be propagate to the provided Being in a general way.
 	 * Does not performs randomization for result.
-	 * @param e The target LivingEntity 
+	 * @param e The target Being 
 	 * @return The Propagable can propagate to the entity;
 	 */
 	public abstract boolean canPropagateFromTo(PropagationNode source, PropagationNode target);

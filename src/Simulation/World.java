@@ -4,9 +4,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Vector;
 
-import Simulation.Beings.LivingEntity;
+import Simulation.Beings.Being;
 import Simulation.Beings.Health.HealthState;
 import Simulation.Propagation.Neighbourhood;
 import Simulation.Propagation.Propagable;
@@ -15,18 +14,17 @@ import Simulation.Propagation.PropagationEvent;
 public class World {
     private static World instance;
 	private Dimension size;
-	private LivingEntity[][] grid;
-	private List<LivingEntity> entities;
+	private Being[][] grid;
+	private List<Being> entities;
 	private int ticksWithoutEvents;
 	private boolean somethingHappened;
-	private boolean simulationFinished;
 	
 	private int day = 1 ;
 
 	public World(int width, int height) {
-		entities = new ArrayList<LivingEntity>();
+		entities = new ArrayList<Being>();
 		size = new Dimension(width, height);
-		grid = new LivingEntity[width][height];
+		grid = new Being[width][height];
 		ticksWithoutEvents = 0;
 		instance = this;
 	}
@@ -40,16 +38,16 @@ public class World {
 	}
 
 	/**
-	 * Returns the LivingEntity at the <i>x,y</i> coordinates. Returns null if
+	 * Returns the Being at the <i>x,y</i> coordinates. Returns null if
 	 * nothing here.
 	 * 
 	 * @param x
 	 *            First coordinate of the entity
 	 * @param y
 	 *            Second coordinate of the entity
-	 * @return The LivingEntity at this position.
+	 * @return The Being at this position.
 	 */
-	public LivingEntity getEntityAt(int x, int y) {
+	public Being getEntityAt(int x, int y) {
 		return grid[x][y];
 	}
 
@@ -62,15 +60,15 @@ public class World {
 	 *            Second coordinate fo the source cell.
 	 * @return The list of the neighboring entities.
 	 */
-	public List<LivingEntity> getNeighbors(int x, int y) {
-		List<LivingEntity> neighbors = new ArrayList<LivingEntity>();
+	public List<Being> getNeighbors(int x, int y) {
+		List<Being> neighbors = new ArrayList<Being>();
 		Point[] neighboringVectors = Neighbourhood.EIGHT;
 		int length = neighboringVectors.length;
 		for (int i = 0; i < length; i++) {
 			Point neighboringVector = neighboringVectors[i];
 			int x1 = x + neighboringVector.x, y1 = y + neighboringVector.y;
 			if (isInGrid(x1, y1)) {
-				LivingEntity entity = getEntityAt(x1, y1);
+				Being entity = getEntityAt(x1, y1);
 				if (entity != null) {
 					neighbors.add(entity);
 				}
@@ -83,7 +81,7 @@ public class World {
 		return 0 <= x && x < grid.length && 0 <= y && y < grid[0].length;
 	}
 
-	public List<LivingEntity> getNeighbors(LivingEntity entity) {
+	public List<Being> getNeighbors(Being entity) {
 		return getNeighbors(entity.getPosX(), entity.getPosY());
 	}
 
@@ -125,7 +123,7 @@ public class World {
 				if (x <= -1 || y <= -1 || x >= xMax || y >= yMax)
 					continue;
 
-				LivingEntity entity = getEntityAt(x, y);
+				Being entity = getEntityAt(x, y);
 				if (entity == null)
 					sb.append("   ");
 				else {
@@ -173,7 +171,7 @@ public class World {
 		return size.height * size.width;
 	}
 
-	public void addEntity(LivingEntity entity) {
+	public void addEntity(Being entity) {
 		grid[entity.getPosX()][entity.getPosY()] = entity;
 		entities.add(entity);
 	}
@@ -185,18 +183,18 @@ public class World {
 	    LogManager logM = LogManager.getInstance();
 
 		// Perform internal ticking of the entities
-		for (LivingEntity entity : entities) {
+		for (Being entity : entities) {
 			entity.tick();
 		}
 		
 		// Go across all the entities of the world
-		for (LivingEntity entity : entities) {
+		for (Being entity : entities) {
 			// Get everything that the entity can spread around
 			for (Propagable p : entity.getPropagables()) {
 				// Check that the entity is able to propagate it
 				if (entity.isPropagating(p) ) {
-					List<LivingEntity> neighbors = getNeighbors(entity);
-					for (LivingEntity neighbor : neighbors) {
+					List<Being> neighbors = getNeighbors(entity);
+					for (Being neighbor : neighbors) {
 						
 						if(!neighbor.canReceive(p)) {
 							continue ;
@@ -221,6 +219,8 @@ public class World {
 			}
 		}
 
+		// TODO : clean this if ok to remove.
+		/*
 		// Final result of the world tick :
 		
 		if (!somethingHappened) {
@@ -229,11 +229,10 @@ public class World {
 			ticksWithoutEvents = 0; // reset the counter
 		}
 
-		// TODO : End the simulation if everybody's healthy or dead.
 		// End the simulation after 5 days without activity
 		if (ticksWithoutEvents >= 5) {
 			simulationFinished = true;
-		}
+		}*/
 		
 		day++;
 		somethingHappened = false;
@@ -248,7 +247,7 @@ public class World {
 	 * @return
 	 */
 	public boolean isFinished() {
-		for(LivingEntity entity : entities){
+		for(Being entity : entities){
 			if( entity.getHealth().getType() != HealthState.Healthy
 					&& entity.getHealth().getType() != HealthState.Dead) {
 				return false ;
@@ -258,9 +257,9 @@ public class World {
 		//return simulationFinished;
 	}
 	
-	public List<LivingEntity> getEntitiesWithHealth(int health){
-		List<LivingEntity> result = new ArrayList<LivingEntity>();
-		for(LivingEntity entity : entities){
+	public List<Being> getEntitiesWithHealth(int health){
+		List<Being> result = new ArrayList<Being>();
+		for(Being entity : entities){
 			if (entity.getHealth().getType() == health) {
 				result.add(entity);
 			}

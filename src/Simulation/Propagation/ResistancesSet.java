@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
-import Simulation.Beings.LivingEntity;
+import Simulation.Beings.Being;
 import Simulation.Propagation.Illness.Illness;
 
 
@@ -50,7 +50,7 @@ public class ResistancesSet {
 		return null ;
 	}
 	
-	public String getProtectionSuccessMessage(Illness i, LivingEntity source, LivingEntity target) {
+	public String getProtectionSuccessMessage(Illness i, Being source, Being target) {
 		return (new StringBuilder()).append(target.toString()).append(" was protected from ")
 				.append(i.toString()).append(" given by ").append(source.toString()).toString();
 	}

@@ -14,6 +14,12 @@ import Simulation.Propagation.Illness.Illness;
 import Simulation.Propagation.Illness.Vaccine;
 
 
+/**
+ * This is an abstract class representing any living thing in the world.
+ * It is an implementation of PropagationNode as it is able to receive Illnesses or Habits.
+ * @author Tom GUILLERMIN
+ *
+ */
 public abstract class Being implements PropagationNode {
 	protected boolean canDie ;
 	public final static int 
@@ -265,6 +271,10 @@ public abstract class Being implements PropagationNode {
 		return vaccines.get(r.nextInt(vaccines.size()));
 	}
 	
+	/**
+	 * Adds an Habit to the Being.
+	 * @param h The habit to add.
+	 */
 	public void addHabit(Habit h){
 		habits.add(h);
 		//System.out.println("Habit "+h+" added to "+this+". Habits = "+habits);
@@ -297,6 +307,9 @@ public abstract class Being implements PropagationNode {
 		return stuborn ;
 	}
 	
+	/**
+	 * String representation of the Being.
+	 */
 	public String toString(){
 		return name+" @ ("+position.x+", "+position.y+")";
 	}
@@ -320,6 +333,10 @@ public abstract class Being implements PropagationNode {
 		return this.propagables ;
 	}
 	
+	/**
+	 * Returns the list of the resistance the Being has against some Propagables.
+	 * @return the list of the resistance the Being has against some Propagables.
+	 */
 	public List<PropagableResistanceBonus> getResistanceBonuses() {
 		List<PropagableResistanceBonus> resistances = new ArrayList<PropagableResistanceBonus>();
 		for(Propagable r : getPropagables()){
@@ -348,10 +365,18 @@ public abstract class Being implements PropagationNode {
 		return true ;
 	}
 
+	/**
+	 * Returns the list of the habits the entity has.
+	 * @return
+	 */
 	public List<Habit> getHabits() {
 		return habits;
 	}
 
+	/**
+	 * Returns the base resistance of the entity to the Propagable.
+	 * @return
+	 */
 	public double getResistanceBase() {
 		return resistanceBase ;
 	}

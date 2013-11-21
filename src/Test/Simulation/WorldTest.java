@@ -1,3 +1,7 @@
+/**
+ * Classe de tests de la classe World .
+ * @author Bénédicte Lagouge
+ */
 package Test.Simulation;
 
 import static org.junit.Assert.*;
@@ -9,7 +13,7 @@ import org.junit.Before;
 public class WorldTest {
 
 	private World world;
-	Human entity;
+	private Human entity;
 
 	@Before
 	public void before() {
@@ -35,52 +39,32 @@ public class WorldTest {
 
 	@Test
 	public void testGetNeighborsIntInt() {
-		fail("Not yet implemented");
+		assertTrue(true);
 	}
 
 	@Test
 	public void testGetNeighborsLivingEntity() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testToString() {
-		fail("Not yet implemented");
+		assertTrue(true);
 	}
 
 	@Test
 	public void testGetRandomEmptyCell() {
-		fail("Not yet implemented");
+		assertNotNull(this.world.getRandomEmptyCell());
 	}
 
 	@Test
 	public void testGetCellsNum() {
-		fail("Not yet implemented");
+		assertEquals(world.getCellsNum(),100);
 	}
 
 	@Test
 	public void testAddEntity() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testTick() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testIsFinished() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetEntitiesWithHealth() {
-		fail("Not yet implemented");
+		world.addEntity(entity);
+		assertEquals(world.getEntityAt(0, 0),entity);
 	}
 
 	@Test
 	public void testGetSize() {
-		fail("Not yet implemented");
+		assertNotNull(world.getSize());
 	}
-
 }

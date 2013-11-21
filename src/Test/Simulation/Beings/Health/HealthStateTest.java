@@ -1,3 +1,8 @@
+/**
+ * Classe de tests de la classe HealthState .
+ * @author Bénédicte Lagouge
+ */
+
 package Test.Simulation.Beings.Health;
 
 import static org.junit.Assert.*;

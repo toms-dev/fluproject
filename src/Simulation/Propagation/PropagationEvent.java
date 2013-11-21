@@ -1,5 +1,11 @@
 package Simulation.Propagation;
 
+/**
+ * This class represents an event of propagation.
+ * It might be successful or failed. 
+ * @author Tom GUILLERMIN
+ *
+ */
 public class PropagationEvent {
 	
 	private boolean log,
@@ -54,7 +60,7 @@ public class PropagationEvent {
 	
 	/**
 	 * Returns true if the event should be logged.
-	 * @return 
+	 * @return True if the event should be logged.
 	 */
 	public boolean isLogged() {
 		return log ;
@@ -70,7 +76,7 @@ public class PropagationEvent {
 	
 	/**
 	 * Returns true if the event is important and should count.
-	 * @return
+	 * @return True if the event is important and should count.
 	 */
 	public boolean isImportant() {
 		return important ;
@@ -78,7 +84,7 @@ public class PropagationEvent {
 	
 	/**
 	 * Sets the message of the event.
-	 * @param s
+	 * @param s The message of the event.
 	 */
 	public void setMessage(String s) {
 		message = s;

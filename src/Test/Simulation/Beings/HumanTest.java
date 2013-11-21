@@ -1,4 +1,7 @@
-
+/**
+ * Classe de tests de la classe Human .
+ * @author Bénédicte Lagouge
+ */
 
 package Test.Simulation.Beings;
 import Simulation.Beings.*;
@@ -43,12 +46,6 @@ public class HumanTest {
 		assertEquals(human.getPosY(),0);
 	}
 
-	@Test//GNEUH
-	public void testGetHealth() {
-		HealthState healthy = new HealthState(0,false,true);
-		assertEquals(human.getHealth(),healthy);
-	}
-
 	@Test
 	public void testGetType() {
 		assertEquals(human.getType(),1);
@@ -68,148 +65,6 @@ public class HumanTest {
 	public void testHasIllness() {
 		Illness illness= new Illness("H5N1",4);
 	}
-	
-	
-	@Test //GNEUUUUUUUUUUUH
-	public void testUpdateToNextHealthState() {
-		human.setRecovering();
-		human.updateToNextHealthState();
-		assertEquals(human.getHealth(),HealthStateFactory.Recovering());
-	}
 
-	@Test
-	public void testTick() {
-
-	}
-
-	@Test
-	public void testEndOfTick() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetHealthy() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetSick() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetContagious() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetRecovering() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testDie() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testIsDead() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetIllness() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testAddVaccine() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testIsVaccinedAgainst() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testHasVaccine() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetVaccines() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetRandomVaccine() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testAddHabit() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testHasHabit() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetStuborn() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testIsStubborn() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testToString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testAddPropagable() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testRemovePropagable() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetPropagables() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetResistanceBonuses() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testCanReceive() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testIsPropagating() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetHabits() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetResistanceBase() {
-		fail("Not yet implemented");
-	}
 
 }

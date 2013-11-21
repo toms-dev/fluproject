@@ -2,24 +2,18 @@ package Simulation.Propagation;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.util.TreeMap;
 
-import Simulation.Beings.LivingEntity;
+import Simulation.Beings.Being;
 import Simulation.Propagation.Illness.Illness;
 
 
 public class ResistancesSet {
-	private Propagable propagable ;
-	private double resistanceBase ;
 	private List<PropagableResistanceBonus> resistances = new ArrayList<PropagableResistanceBonus>();
 	
-	public ResistancesSet(double base) {
-		resistanceBase = base ;
+	public ResistancesSet() {
+		
 	}
 	
 	public void addResistance(PropagableResistanceBonus resistance) {
@@ -50,7 +44,7 @@ public class ResistancesSet {
 		return null ;
 	}
 	
-	public String getProtectionSuccessMessage(Illness i, LivingEntity source, LivingEntity target) {
+	public String getProtectionSuccessMessage(Illness i, Being source, Being target) {
 		return (new StringBuilder()).append(target.toString()).append(" was protected from ")
 				.append(i.toString()).append(" given by ").append(source.toString()).toString();
 	}

@@ -2,11 +2,9 @@ package Simulation.Beings;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import Simulation.World;
 import Simulation.Beings.Health.HealthState;
 import Simulation.Beings.Health.HealthStateFactory;
 import Simulation.Propagation.Propagable;
@@ -16,7 +14,13 @@ import Simulation.Propagation.Illness.Illness;
 import Simulation.Propagation.Illness.Vaccine;
 
 
-public abstract class LivingEntity implements PropagationNode {
+/**
+ * This is an abstract class representing any living thing in the world.
+ * It is an implementation of PropagationNode as it is able to receive Illnesses or Habits.
+ * @author Tom GUILLERMIN
+ *
+ */
+public abstract class Being implements PropagationNode {
 	protected boolean canDie ;
 	public final static int 
 		ANY = 0,
@@ -40,12 +44,12 @@ public abstract class LivingEntity implements PropagationNode {
 	private double resistanceBase = 0.5;
 	
 	/**
-	 * Constructor for LivingEntity.
+	 * Constructor for Being.
 	 * @param type Type of the entity.
 	 * @param x X Coordinates
 	 * @param y Y Coordinates
 	 */
-	public LivingEntity(int type, int x, int y){
+	public Being(int type, int x, int y){
 		this.type = type ;
 		health = HealthStateFactory.Healty();
 		position = new Point(x, y);
@@ -85,7 +89,7 @@ public abstract class LivingEntity implements PropagationNode {
 	}
 
 	/**
-	 * Returns the type of the LivingEntity.
+	 * Returns the type of the Being.
 	 * @return
 	 */
 	public int getType() {
@@ -139,7 +143,6 @@ public abstract class LivingEntity implements PropagationNode {
 		health.tick();
 		if (health.mustBeUpdated()){
 			updateToNextHealthState();
-			World.getInstance().somethingHappened();
 		}
 	}
 	
@@ -268,6 +271,10 @@ public abstract class LivingEntity implements PropagationNode {
 		return vaccines.get(r.nextInt(vaccines.size()));
 	}
 	
+	/**
+	 * Adds an Habit to the Being.
+	 * @param h The habit to add.
+	 */
 	public void addHabit(Habit h){
 		habits.add(h);
 		//System.out.println("Habit "+h+" added to "+this+". Habits = "+habits);
@@ -275,7 +282,7 @@ public abstract class LivingEntity implements PropagationNode {
 	}
 	
 	/**
-	 * Returns true if this LivingEntity has a given habit.
+	 * Returns true if this Being has a given habit.
 	 * @param h
 	 * @return
 	 */
@@ -300,6 +307,9 @@ public abstract class LivingEntity implements PropagationNode {
 		return stuborn ;
 	}
 	
+	/**
+	 * String representation of the Being.
+	 */
 	public String toString(){
 		return name+" @ ("+position.x+", "+position.y+")";
 	}
@@ -323,6 +333,10 @@ public abstract class LivingEntity implements PropagationNode {
 		return this.propagables ;
 	}
 	
+	/**
+	 * Returns the list of the resistance the Being has against some Propagables.
+	 * @return the list of the resistance the Being has against some Propagables.
+	 */
 	public List<PropagableResistanceBonus> getResistanceBonuses() {
 		List<PropagableResistanceBonus> resistances = new ArrayList<PropagableResistanceBonus>();
 		for(Propagable r : getPropagables()){
@@ -351,10 +365,18 @@ public abstract class LivingEntity implements PropagationNode {
 		return true ;
 	}
 
+	/**
+	 * Returns the list of the habits the entity has.
+	 * @return
+	 */
 	public List<Habit> getHabits() {
 		return habits;
 	}
 
+	/**
+	 * Returns the base resistance of the entity to the Propagable.
+	 * @return
+	 */
 	public double getResistanceBase() {
 		return resistanceBase ;
 	}

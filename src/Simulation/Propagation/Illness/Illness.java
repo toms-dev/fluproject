@@ -1,11 +1,10 @@
 package Simulation.Propagation.Illness;
 import java.util.ArrayList;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
-import Simulation.Beings.LivingEntity;
+import Simulation.Beings.Being;
 import Simulation.Beings.PropagationNode;
 import Simulation.Propagation.Propagable;
 import Simulation.Propagation.PropagableResistanceBonus;
@@ -15,12 +14,14 @@ import Simulation.Propagation.ResistancesSet;
 public class Illness extends Propagable {
 	private List<Integer> targetSpecies = new ArrayList<Integer>();
 	private String name;
-	private int incubationTime;
-	private HashMap<Integer, HashMap<Integer, Double>> contaminationRates = new HashMap<Integer, HashMap<Integer, Double>>(); 
+	//private HashMap<Integer, HashMap<Integer, Double>> contaminationRates = new HashMap<Integer, HashMap<Integer, Double>>(); 
 
-	public Illness(String name, int incubationTime) {
+	/**
+	 * Illness constructor.
+	 * @param name The name of the Illness.
+	 */
+	public Illness(String name) {
 		this.name = name;
-		this.incubationTime = incubationTime;
 	}
 
 	/**
@@ -46,7 +47,7 @@ public class Illness extends Propagable {
 	@Override
 	public boolean canPropagateFromTo(PropagationNode source, PropagationNode target) {
 		// Do some casting... (bad)
-		LivingEntity targetEntity = (LivingEntity) target;
+		Being targetEntity = (Being) target;
 		return targetSpecies.contains(targetEntity.getType());
 	}
 
@@ -65,7 +66,7 @@ public class Illness extends Propagable {
 		PropagationEvent event = new PropagationEvent();
 		event.setLogged(false);
 		
-		LivingEntity sourceEntity = (LivingEntity) source, targetEntity = (LivingEntity) target;
+		Being sourceEntity = (Being) source, targetEntity = (Being) target;
 				
 		if (canPropagateFromTo(sourceEntity, targetEntity)) {
 			Random r = new Random();
@@ -73,7 +74,7 @@ public class Illness extends Propagable {
 			double resistanceBase = targetEntity.getResistanceBase();
 			
 			if (attempt >= resistanceBase) {
-				ResistancesSet resistances = new ResistancesSet(resistanceBase);
+				ResistancesSet resistances = new ResistancesSet();
 				resistances.addAllResistances(targetEntity.getResistanceBonuses());
 				
 				PropagableResistanceBonus appliedResistance = resistances.applyResistancesToAttemp(this);
@@ -94,7 +95,13 @@ public class Illness extends Propagable {
 		return event;
 	}
 	
-	public double getPropagationRate(LivingEntity source, LivingEntity target) {
+	/**
+	 * Returns the propagation rate between a source and a target entity.
+	 * @param source The entity propagating.
+	 * @param target The entity that might receive the illness.
+	 * @return The rate of propagation, between 0 and 1.
+	 */
+	public double getPropagationRate(Being source, Being target) {
 		if (! targetSpecies.contains(target)) return 0;
 		return getPropagationRate(source.getType(), target.getType());
 	}
@@ -103,6 +110,12 @@ public class Illness extends Propagable {
 		return name;
 	}
 
+	/**
+	 * Returns the relevant string when an entity has propagated the Illness to an other.  
+	 * @param source
+	 * @param target
+	 * @return
+	 */
 	public String getPropagatedMessage(PropagationNode source,
 			PropagationNode target) {
 		return new StringBuilder().append(target.toString())

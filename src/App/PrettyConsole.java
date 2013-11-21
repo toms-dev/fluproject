@@ -1,7 +1,14 @@
 package App;
 public class PrettyConsole {
 	private static final int width = 55;
-	private static final int padding = 1;
+	//private static final int padding = 1;
+	
+	/**
+	 * Creates a dialog box string with an header.
+	 * @param header The content of the header.
+	 * @param message The content of the body.
+	 * @return	The string representing the dialog box.
+	 */
 	public static String HeaderTextBox(String header, String message){
 		StringBuilder sb = new StringBuilder();
 		String fitMessage = fit(message, width),
@@ -32,7 +39,13 @@ public class PrettyConsole {
 		return sb.toString() ;
 	}
 	
-	public static String fit(String s, int width){
+	/**
+	 * Make a string fit into a fixed width, by splitting in new lines.
+	 * @param s The string to be it
+	 * @param width		The width of the text.
+	 * @return	The formatted string.
+	 */
+	static String fit(String s, int width){
 		StringBuilder sb = new StringBuilder();
 		String[] lines = s.split("\n");
 		for(String l : lines){

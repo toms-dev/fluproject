@@ -1,3 +1,7 @@
+/**
+ * Classe de tests de la classe ResistanceSet .
+ * @author Bénédicte Lagouge
+ */
 package Test.Simulation.Progagation;
 
 import static org.junit.Assert.*;
@@ -63,11 +67,6 @@ public class ResistanceSetTest {
 		assertEquals(habit2,resistance.getResistance().get(resistance.getResistance().size()-1));
 	}
 */
-	@Test
-	public void testApplyResistancesToAttemp() {
-		//TODO
-		//aléatoire
-	}
 
 	@Test
 	public void testGetProtectionSuccessMessage() {

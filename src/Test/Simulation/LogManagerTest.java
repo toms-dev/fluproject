@@ -1,3 +1,7 @@
+/**
+ * Classe de tests de la classe LogManager .
+ * @author Bénédicte Lagouge
+ */
 package Test.Simulation;
 
 import static org.junit.Assert.*;

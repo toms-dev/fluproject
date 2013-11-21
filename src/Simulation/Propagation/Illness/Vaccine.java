@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
-import Simulation.Beings.LivingEntity;
+import Simulation.Beings.Being;
 import Simulation.Beings.PropagationNode;
 import Simulation.Propagation.PropagableResistanceBonus;
 import Simulation.Propagation.PropagationEvent;
@@ -70,11 +70,11 @@ public class Vaccine extends PropagableResistanceBonus {
 		return name;
 	}
 	
-	public String getVaccinatedMessage(LivingEntity source, LivingEntity target){	
+	public String getVaccinatedMessage(Being source, Being target){	
 		return (new StringBuilder()).append(target.toString()).append(" was vaccinated with ").append(this.toString()).append(" by ").append(source.toString()).toString();
 	}
 	
-	public String getFailedVaccineMessage(LivingEntity source, LivingEntity target){	
+	public String getFailedVaccineMessage(Being source, Being target){	
 		return (new StringBuilder()).append("Because of its stubborness, ").append(target.toString()).append(" was not vaccinated with ").append(this.toString()).append(" by ").append(source.toString()).toString();
 	}
 
@@ -84,8 +84,8 @@ public class Vaccine extends PropagableResistanceBonus {
 		PropagationEvent event = new PropagationEvent();
 		event.setLogged(false);
 		
-		LivingEntity sourceEntity = (LivingEntity) source,
-				targetEntity = (LivingEntity) target;
+		Being sourceEntity = (Being) source,
+				targetEntity = (Being) target;
 		if(species.contains(targetEntity)) {
 			Random r = new Random();
 			double attempt = r.nextDouble(),
@@ -115,8 +115,7 @@ public class Vaccine extends PropagableResistanceBonus {
 	@Override
 	public boolean canPropagateFromTo(PropagationNode source,
 			PropagationNode target) {
-		LivingEntity sourceEntity = (LivingEntity) source,
-				targetEntity = (LivingEntity) target;
+		Being targetEntity = (Being) target;
 		return species.contains(targetEntity);
 	}
 }

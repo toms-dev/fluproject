@@ -2,7 +2,7 @@ package Simulation.Propagation.Behaviors;
 
 import java.util.Random;
 
-import Simulation.Beings.LivingEntity;
+import Simulation.Beings.Being;
 import Simulation.Beings.PropagationNode;
 import Simulation.Propagation.PropagableResistanceBonus;
 import Simulation.Propagation.PropagationEvent;
@@ -19,7 +19,7 @@ public class Habit extends PropagableResistanceBonus {
 		
 		this.propagationRate = propagationRate;
 		
-		this.getPropagationMatrix().addPropagationLink(LivingEntity.ANY, LivingEntity.ANY, 0);
+		this.getPropagationMatrix().addPropagationLink(Being.ANY, Being.ANY, 0);
 		// We consider that an habit can only be passed from a member of the same species.
 		this.getPropagationMatrix().addPropagationLink(species, species, propagationRate);
 	}
@@ -36,8 +36,8 @@ public class Habit extends PropagableResistanceBonus {
 		event.setLogged(false);
 		
 		// Some casting
-		LivingEntity sourceEntity = (LivingEntity) source,
-				targetEntity = (LivingEntity) target;
+		Being sourceEntity = (Being) source,
+				targetEntity = (Being) target;
 		
 		if (!targetEntity.hasHabit(this)) {
 			if (targetEntity.isStubborn()) {
@@ -57,8 +57,8 @@ public class Habit extends PropagableResistanceBonus {
 	@Override
 	public boolean canPropagateFromTo(PropagationNode source, PropagationNode target) {
 		// The only situation in which an habit can propagate is that the source and/or target is dead.
-		LivingEntity sourceEntity = (LivingEntity) source,
-				targetEntity = (LivingEntity) target ;
+		Being sourceEntity = (Being) source,
+				targetEntity = (Being) target ;
 		return ! targetEntity.isDead() && ! sourceEntity.isDead();
 	}
 	
@@ -69,7 +69,7 @@ public class Habit extends PropagableResistanceBonus {
 	 * @param target
 	 * @return
 	 */
-	private String getPropagatedMessage(LivingEntity source, LivingEntity target){
+	private String getPropagatedMessage(Being source, Being target){
 		return new StringBuilder().append(target.toString()).append(" learned  ")
 				.append(this.toString())
 				.append(" from ").append(source).toString();
@@ -81,7 +81,7 @@ public class Habit extends PropagableResistanceBonus {
 	 * @param target
 	 * @return
 	 */
-	private String getStubornMessage(LivingEntity source, LivingEntity target){
+	private String getStubornMessage(Being source, Being target){
 		return new StringBuilder().append(target.toString()).append(" was too stuborn to learn ")
 				.append(this.toString())
 				.append(" from ").append(source).toString();

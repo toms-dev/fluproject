@@ -40,7 +40,11 @@ public class LogManager {
     public String poll() {
         return logQueue.poll();
     }
-    
+   
+    /**
+     * Returns true if the log queue is empty.
+     * @return True if the log queue is empty.
+     */
     public boolean isEmpty() {
         return logQueue.isEmpty();
     }

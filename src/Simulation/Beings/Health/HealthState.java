@@ -1,5 +1,11 @@
 package Simulation.Beings.Health;
 
+/**
+ * This class represents a health state. It may evolve in the time.
+ * It can be set to be contagious or the change automatically after a certain duration.
+ * @author Tom GUILLERMIN
+ *
+ */
 public class HealthState {
 	public static int Healthy = 0;
 	public static int Sick = 1;
@@ -9,20 +15,30 @@ public class HealthState {
 	
 	private int type ;
 	
-	private boolean isContagious, canChange;
-	private int stateDuration ;
+	private boolean isContagious;
 	
 	private boolean autoExpires = false;
 	private int remainingDays ;
 	
+	/**
+	 * Health constructor
+	 * @param type The ID of the Health type
+	 * @param isContagious True if this HealthState is contagious to other neighboring beings.
+	 * @param canChange True if it can change by itself.
+	 */
 	public HealthState(int type, boolean isContagious, boolean canChange){
-		this(type, isContagious, canChange, -1);
+		this(type, isContagious, -1);
 	}
 	
-	public HealthState(int type, boolean isContagious, boolean canChange, int duration){
+	/**
+	 * Health constructor
+	 * @param type The ID of the Health type
+	 * @param isContagious True if this HealthState is contagious to other neighboring beings.
+	 * @param duration The duration of this health state.
+	 */
+	public HealthState(int type, boolean isContagious, int duration){
 		this.type = type ;
 		this.isContagious = isContagious;
-		this.canChange = canChange;
 		if( duration != -1 ){
 			autoExpires = true ;
 			this.remainingDays = duration;
@@ -45,6 +61,10 @@ public class HealthState {
 		return type;
 	}
 	
+	/**
+	 * Returns the number of remaining days before the Health State ends.
+	 * @return The number of remaining days before the Health State ends.
+	 */
 	public int getRemainingDays(){
 		return remainingDays;
 	}
@@ -57,6 +77,9 @@ public class HealthState {
 		return autoExpires && remainingDays <= 0;
 	}
 	
+	/**
+	 * Performs a logic update.
+	 */
 	public void tick(){
 		if( autoExpires ){
 			remainingDays--;	

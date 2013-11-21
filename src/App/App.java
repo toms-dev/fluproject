@@ -14,7 +14,12 @@ public class App {
 	private static boolean autoPlay ;
 	private static int autoPlayDuration ;
 	
-	
+	/**
+	 * Start the app.
+	 * @param args
+	 * @throws IOException
+	 * @throws InterruptedException
+	 */
 	public static void main(String[] args) throws IOException, InterruptedException{
 		LogManager logM = LogManager.getInstance();
 	    
@@ -60,6 +65,10 @@ public class App {
 		System.out.println(PrettyConsole.HeaderTextBox("Info", "The simulation is now finished !\n"+config.world.getEntitiesWithHealth(HealthState.Dead).size()+" died from the flu."));	
 	}
 	
+	/**
+	 * Asks the user to input a custom configuration for the simulation.
+	 * @return The Configuration the user created.
+	 */
 	private static SimulationConfiguration userConfiguration(){
 		SimulationConfiguration config = new SimulationConfiguration();
 		String neighbourhood = App.readStringArray("\nSelect neighbourhood type :", new String[]{"four","eight"});
@@ -102,7 +111,9 @@ public class App {
 		return config ;
 	}
 	
-	
+	/**
+	 * Setup the auto-play feature.
+	 */
 	private static void configureAutoPlay() {
 		autoPlayDuration = readInteger("Please choose the duration of a day for the AutoPlay mode : (in ms) ");
 		if( autoPlayDuration < 0) {
@@ -181,6 +192,13 @@ public class App {
 		}
 	}
 	
+	/**
+	 * Read a string from the standard input. A list of accepted strings is provided.
+	 * The user will be asked for a string as long as the string won't be valid.
+	 * @param message The prompt message displayed to the user.
+	 * @param validStrings	The list of the accepted string.
+	 * @return	The choice of the user.
+	 */
 	public static String readStringArray(String message, String[] validStrings){
 		String input ;
 		

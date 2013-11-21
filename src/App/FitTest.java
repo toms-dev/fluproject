@@ -1,6 +1,10 @@
 package App;
 
-
+/**
+ * Just a test class to try the "Pretty"Console class.
+ * @author tguiller
+ *
+ */
 public class FitTest {
 	public static void main(String[] args){
 		String s = "123456789 1234\n123456789123456789\n12345";
